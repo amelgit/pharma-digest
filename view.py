@@ -324,11 +324,37 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <title>Pharma Digest</title>
 <style>
   :root {
+    /* sidebar — always dark */
     --sidebar-bg: #0f172a;
     --sidebar-text: #cbd5e1;
     --sidebar-active: #f1f5f9;
     --sidebar-hover: #1e293b;
     --sidebar-accent: #0ea5e9;
+    --today-badge: #0ea5e9;
+    --sidebar-w: 260px;
+    /* main area — dark mode defaults */
+    --main-bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --heading: #f1f5f9;
+    --border: #334155;
+    --hr: #334155;
+    --link: #38bdf8;
+    --code-bg: #0a1628;
+    /* component tokens */
+    --para-text: #cbd5e1;
+    --card-shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.25);
+    --scrollbar-thumb: #334155;
+    --mkt-bg: #162032;
+    --mkt-row-border: #243348;
+    --mkt-track-bg: #334155;
+    --mkt-analysis-bg: #0c1f35;
+    --mkt-analysis-border: #1e4d6b;
+    --mkt-analysis-text: #93c5fd;
+    --src-item-border: #1e293b;
+  }
+  body.light-mode {
     --main-bg: #f8fafc;
     --card-bg: #ffffff;
     --text: #0f172a;
@@ -338,8 +364,16 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     --hr: #e2e8f0;
     --link: #0284c7;
     --code-bg: #f1f5f9;
-    --today-badge: #0ea5e9;
-    --sidebar-w: 260px;
+    --para-text: #334155;
+    --card-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+    --scrollbar-thumb: #d1d5db;
+    --mkt-bg: #f8fafc;
+    --mkt-row-border: #f1f5f9;
+    --mkt-track-bg: #e2e8f0;
+    --mkt-analysis-bg: #f0f9ff;
+    --mkt-analysis-border: #bae6fd;
+    --mkt-analysis-text: #0c2d48;
+    --src-item-border: #f8fafc;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -349,6 +383,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     display: flex;
     height: 100vh;
     overflow: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   /* ── Sidebar ── */
@@ -377,6 +412,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     color: var(--sidebar-text);
     margin-top: 4px;
   }
+  .sidebar-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 2px;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  #theme-btn:hover { opacity: 1; }
   #refresh-btn {
     margin-top: 12px;
     width: 100%;
@@ -473,7 +525,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }
   #main::-webkit-scrollbar { width: 6px; }
   #main::-webkit-scrollbar-track { background: var(--main-bg); }
-  #main::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  #main::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
   .briefing { display: none; }
   .briefing.visible { display: block; }
   .briefing-card {
@@ -481,7 +533,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     margin: 0 auto;
     background: var(--card-bg);
     border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+    box-shadow: var(--card-shadow);
     padding: 40px 48px;
   }
   .briefing-card h1 {
@@ -508,7 +560,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .briefing-card p {
     font-size: 15px;
     line-height: 1.75;
-    color: #334155;
+    color: var(--para-text);
     margin-bottom: 12px;
   }
   .briefing-card ul {
@@ -519,7 +571,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .briefing-card ul li {
     font-size: 15px;
     line-height: 1.7;
-    color: #334155;
+    color: var(--para-text);
     padding: 5px 0 5px 20px;
     position: relative;
   }
@@ -537,7 +589,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     margin: 24px 0;
   }
   .briefing-card strong { color: var(--heading); }
-  .briefing-card em { color: #475569; }
+  .briefing-card em { color: var(--text-muted); }
   .briefing-card code {
     background: var(--code-bg);
     padding: 1px 6px;
@@ -553,7 +605,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
   /* ── Market Widget ── */
   .mkt-widget {
-    background: #f8fafc;
+    background: var(--mkt-bg);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 18px 22px;
@@ -598,7 +650,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .mkt-table th:nth-child(3) { text-align: left; }
   .mkt-table td {
     padding: 5px 6px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--mkt-row-border);
     vertical-align: middle;
     font-size: 12px;
   }
@@ -621,7 +673,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }
   .mkt-track {
     height: 3px;
-    background: #e2e8f0;
+    background: var(--mkt-track-bg);
     border-radius: 2px;
     position: relative;
   }
@@ -633,7 +685,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     border-radius: 50%;
     top: -2.5px;
     transform: translateX(-50%);
-    box-shadow: 0 0 0 2px #f8fafc;
+    box-shadow: 0 0 0 2px var(--mkt-bg);
   }
   .mkt-pct {
     text-align: right;
@@ -665,12 +717,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .mkt-analysis {
     margin-top: 14px;
     padding: 12px 16px;
-    background: #f0f9ff;
-    border: 1px solid #bae6fd;
+    background: var(--mkt-analysis-bg);
+    border: 1px solid var(--mkt-analysis-border);
     border-radius: 8px;
     font-size: 13px;
     line-height: 1.65;
-    color: #0c2d48;
+    color: var(--mkt-analysis-text);
   }
   .mkt-analysis-title {
     font-size: 10px;
@@ -680,7 +732,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     color: #0ea5e9;
     margin-bottom: 6px;
   }
-  .mkt-analysis p { margin: 0 0 6px; font-size: 13px; color: #0c2d48; line-height: 1.65; }
+  .mkt-analysis p { margin: 0 0 6px; font-size: 13px; color: var(--mkt-analysis-text); line-height: 1.65; }
   .mkt-analysis p:last-child { margin-bottom: 0; }
 
   /* ── Sources ── */
@@ -693,7 +745,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   .src-summary {
     cursor: pointer;
     padding: 11px 16px;
-    background: #f8fafc;
+    background: var(--mkt-bg);
     font-size: 12px;
     font-weight: 600;
     color: var(--text-muted);
@@ -733,7 +785,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     align-items: baseline;
     gap: 16px;
     padding: 4px 0;
-    border-bottom: 1px solid #f8fafc;
+    border-bottom: 1px solid var(--src-item-border);
   }
   .src-item:last-child { border-bottom: none; }
   .src-link {
@@ -774,7 +826,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 <nav id="sidebar">
   <div id="sidebar-header">
-    <h1>Pharma Digest</h1>
+    <div class="sidebar-title-row">
+      <h1>Pharma Digest</h1>
+      <button id="theme-btn" onclick="toggleTheme()" title="Dark/Light Mode umschalten">🌙</button>
+    </div>
     <p id="count-label"></p>
     <button id="refresh-btn" onclick="triggerRebuild()">
       <span id="refresh-icon">🔄</span>
@@ -793,6 +848,23 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </main>
 
 <script>
+function applyTheme(mode) {
+  if (mode === "light") {
+    document.body.classList.add("light-mode");
+    document.getElementById("theme-btn").textContent = "☀️";
+  } else {
+    document.body.classList.remove("light-mode");
+    document.getElementById("theme-btn").textContent = "🌙";
+  }
+}
+function toggleTheme() {
+  const isLight = document.body.classList.contains("light-mode");
+  const next = isLight ? "dark" : "light";
+  try { localStorage.setItem("pharma_theme", next); } catch(e) {}
+  applyTheme(next);
+}
+applyTheme((() => { try { return localStorage.getItem("pharma_theme") || "dark"; } catch(e) { return "dark"; } })());
+
 const briefings = BRIEFINGS_DATA;
 
 const today = new Date().toISOString().slice(0, 10);
