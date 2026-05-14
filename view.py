@@ -836,8 +836,26 @@ if (briefings.length > 0) show(briefings[0].id);
 
 const REPO = "amelgit/pharma-digest";
 const WORKFLOW_FILE = "digest.yml";
+const RUN_KEY = "pharma_digest_run";
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── Persist run state across page reloads ──
+function saveRun(runId, startTime) {
+  try { localStorage.setItem(RUN_KEY, JSON.stringify({ runId, startTime })); } catch(e) {}
+}
+function clearRun() {
+  try { localStorage.removeItem(RUN_KEY); } catch(e) {}
+}
+function loadRun() {
+  try {
+    const s = localStorage.getItem(RUN_KEY);
+    if (!s) return null;
+    const state = JSON.parse(s);
+    if (Date.now() - state.startTime > 15 * 60 * 1000) { clearRun(); return null; }
+    return state;
+  } catch(e) { return null; }
+}
 
 function setProgress(pct, text, state) {
   const fill = document.getElementById("prog-fill");
@@ -845,6 +863,13 @@ function setProgress(pct, text, state) {
   fill.style.width = pct + "%";
   fill.className = "prog-fill" + (state === "done" ? " done" : state === "fail" ? " fail" : "");
   if (text) document.getElementById("prog-status").textContent = text;
+}
+
+function setBusy() {
+  const btn = document.getElementById("refresh-btn");
+  btn.disabled = true;
+  document.getElementById("refresh-icon").textContent = "⏳";
+  document.getElementById("refresh-label").textContent = "Läuft…";
 }
 
 function resetBtn() {
@@ -857,6 +882,40 @@ function resetBtn() {
   document.getElementById("prog-fill").style.width = "0%";
 }
 
+// ── Core polling loop (shared by fresh trigger and page-reload resume) ──
+async function pollUntilDone(runId, pollStart, headers) {
+  while (true) {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/actions/runs/${runId}`,
+      { headers }
+    );
+    const run = await res.json();
+    const elapsed = Date.now() - pollStart;
+
+    if (run.status === "queued") {
+      setProgress(20, "⏳ In Warteschlange…");
+    } else if (run.status === "in_progress") {
+      const pct = Math.min(90, 25 + (elapsed / 120_000) * 65);
+      const label =
+        elapsed < 30_000 ? "📡 Pharma-Quellen werden abgerufen…" :
+        elapsed < 80_000 ? "🤖 Briefing wird mit Claude generiert…" :
+                           "💾 Briefing wird gespeichert & gepusht…";
+      setProgress(pct, label);
+    } else if (run.status === "completed") {
+      clearRun();
+      if (run.conclusion === "success") {
+        setProgress(100, "✅ Fertig! Seite wird neu geladen…", "done");
+        await sleep(1800);
+        window.location.reload();
+        return;
+      } else {
+        throw new Error("Workflow fehlgeschlagen: " + run.conclusion);
+      }
+    }
+    await sleep(8000);
+  }
+}
+
 async function triggerRebuild() {
   const hash = window.location.hash.slice(1);
   const token = new URLSearchParams(hash).get("token");
@@ -864,10 +923,7 @@ async function triggerRebuild() {
     alert("Kein Token in der URL gefunden.\\n\\nBitte die Seite mit #token=DEIN_TOKEN aufrufen.");
     return;
   }
-  const btn = document.getElementById("refresh-btn");
-  btn.disabled = true;
-  document.getElementById("refresh-icon").textContent = "⏳";
-  document.getElementById("refresh-label").textContent = "Wird gestartet…";
+  setBusy();
   setProgress(5, "Verbindung zu GitHub…");
 
   const headers = {
@@ -877,7 +933,6 @@ async function triggerRebuild() {
   };
 
   try {
-    // 1. Trigger the workflow
     const dispatchRes = await fetch(
       `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
       { method: "POST", headers, body: JSON.stringify({ ref: "main" }) }
@@ -890,7 +945,6 @@ async function triggerRebuild() {
     setProgress(10, "Warte auf Workflow-Start…");
     await sleep(5000);
 
-    // 2. Find the newly created run (within last 3 min)
     let runId = null;
     for (let i = 0; i < 12 && !runId; i++) {
       const res = await fetch(
@@ -908,45 +962,43 @@ async function triggerRebuild() {
     }
     if (!runId) throw new Error("Kein aktiver Workflow-Run gefunden");
 
+    const pollStart = Date.now();
+    saveRun(runId, pollStart);
     setProgress(20, "Workflow gestartet");
 
-    // 3. Poll until complete — update bar based on real status + elapsed time
-    const pollStart = Date.now();
-    while (true) {
-      const res = await fetch(
-        `https://api.github.com/repos/${REPO}/actions/runs/${runId}`,
-        { headers }
-      );
-      const run = await res.json();
-      const elapsed = Date.now() - pollStart;
-
-      if (run.status === "queued") {
-        setProgress(20, "⏳ In Warteschlange…");
-      } else if (run.status === "in_progress") {
-        const pct = Math.min(90, 25 + (elapsed / 120_000) * 65);
-        const label =
-          elapsed < 30_000 ? "📡 Pharma-Quellen werden abgerufen…" :
-          elapsed < 80_000 ? "🤖 Briefing wird mit Claude generiert…" :
-                             "💾 Briefing wird gespeichert & gepusht…";
-        setProgress(pct, label);
-      } else if (run.status === "completed") {
-        if (run.conclusion === "success") {
-          setProgress(100, "✅ Fertig! Seite wird neu geladen…", "done");
-          await sleep(1800);
-          window.location.reload();
-          return;
-        } else {
-          throw new Error("Workflow fehlgeschlagen: " + run.conclusion);
-        }
-      }
-      await sleep(8000);
-    }
+    await pollUntilDone(runId, pollStart, headers);
   } catch (err) {
+    clearRun();
     setProgress(100, "✗ " + err.message, "fail");
     await sleep(3000);
     resetBtn();
   }
 }
+
+// ── On page load: resume polling if a run was in progress before reload ──
+(async function resumeIfActive() {
+  const state = loadRun();
+  if (!state) return;
+  const token = new URLSearchParams(window.location.hash.slice(1)).get("token");
+  if (!token) { clearRun(); return; }
+  setBusy();
+  const elapsed = Date.now() - state.startTime;
+  const pct = Math.min(85, 20 + (elapsed / 120_000) * 65);
+  setProgress(pct, "Fortschritt wird wiederhergestellt…");
+  const headers = {
+    "Authorization": "Bearer " + token,
+    "Accept": "application/vnd.github+json",
+    "Content-Type": "application/json",
+  };
+  try {
+    await pollUntilDone(state.runId, state.startTime, headers);
+  } catch (err) {
+    clearRun();
+    setProgress(100, "✗ " + err.message, "fail");
+    await sleep(3000);
+    resetBtn();
+  }
+})();
 </script>
 </body>
 </html>
