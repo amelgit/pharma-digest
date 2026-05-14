@@ -29,7 +29,8 @@ def scrape_rss(url: str, max_items: int = 10) -> list[dict]:
         feed = feedparser.parse(url, request_headers=HEADERS)
         items = []
         for entry in feed.entries[:max_items]:
-            title = entry.get("title", "").strip()
+            raw = entry.get("title", "").strip()
+            title = BeautifulSoup(raw, "lxml").get_text(strip=True) if "<" in raw else raw
             if title:
                 items.append({
                     "title": title,
