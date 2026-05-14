@@ -397,6 +397,28 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   #refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   #refresh-btn.success { color: #4ade80; border-color: #166534; }
   #refresh-btn.error   { color: #f87171; border-color: #7f1d1d; }
+  #prog-wrap { margin-top: 10px; display: none; }
+  .prog-track {
+    height: 2px;
+    background: #1e293b;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .prog-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--sidebar-accent);
+    border-radius: 2px;
+    transition: width 1.2s ease;
+  }
+  .prog-fill.done { background: #4ade80; }
+  .prog-fill.fail { background: #f87171; }
+  .prog-status {
+    margin-top: 7px;
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.4;
+  }
   #nav {
     flex: 1;
     overflow-y: auto;
@@ -758,6 +780,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
       <span id="refresh-icon">🔄</span>
       <span id="refresh-label">Neu generieren</span>
     </button>
+    <div id="prog-wrap">
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="prog-status" id="prog-status"></div>
+    </div>
   </div>
   <div id="nav"></div>
 </nav>
@@ -808,7 +834,30 @@ function show(id) {
 
 if (briefings.length > 0) show(briefings[0].id);
 
-function triggerRebuild() {
+const REPO = "amelgit/pharma-digest";
+const WORKFLOW_FILE = "digest.yml";
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function setProgress(pct, text, state) {
+  const fill = document.getElementById("prog-fill");
+  document.getElementById("prog-wrap").style.display = "block";
+  fill.style.width = pct + "%";
+  fill.className = "prog-fill" + (state === "done" ? " done" : state === "fail" ? " fail" : "");
+  if (text) document.getElementById("prog-status").textContent = text;
+}
+
+function resetBtn() {
+  const btn = document.getElementById("refresh-btn");
+  btn.disabled = false;
+  btn.classList.remove("success", "error");
+  document.getElementById("refresh-icon").textContent = "🔄";
+  document.getElementById("refresh-label").textContent = "Neu generieren";
+  document.getElementById("prog-wrap").style.display = "none";
+  document.getElementById("prog-fill").style.width = "0%";
+}
+
+async function triggerRebuild() {
   const hash = window.location.hash.slice(1);
   const token = new URLSearchParams(hash).get("token");
   if (!token) {
@@ -816,41 +865,87 @@ function triggerRebuild() {
     return;
   }
   const btn = document.getElementById("refresh-btn");
-  const icon = document.getElementById("refresh-icon");
-  const label = document.getElementById("refresh-label");
   btn.disabled = true;
-  icon.textContent = "⏳";
-  label.textContent = "Wird gestartet…";
-  fetch("https://api.github.com/repos/amelgit/pharma-digest/actions/workflows/digest.yml/dispatches", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + token,
-      "Accept": "application/vnd.github+json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ ref: "main" }),
-  })
-  .then(r => {
-    if (r.ok || r.status === 204) {
-      btn.classList.add("success");
-      icon.textContent = "✓";
-      label.textContent = "Gestartet – in ~2 Min. neu laden";
-      setTimeout(() => window.location.reload(), 150000);
-    } else {
-      return r.json().then(j => { throw new Error(j.message || r.status); });
+  document.getElementById("refresh-icon").textContent = "⏳";
+  document.getElementById("refresh-label").textContent = "Wird gestartet…";
+  setProgress(5, "Verbindung zu GitHub…");
+
+  const headers = {
+    "Authorization": "Bearer " + token,
+    "Accept": "application/vnd.github+json",
+    "Content-Type": "application/json",
+  };
+
+  try {
+    // 1. Trigger the workflow
+    const dispatchRes = await fetch(
+      `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
+      { method: "POST", headers, body: JSON.stringify({ ref: "main" }) }
+    );
+    if (!dispatchRes.ok) {
+      const j = await dispatchRes.json().catch(() => ({}));
+      throw new Error(j.message || "HTTP " + dispatchRes.status);
     }
-  })
-  .catch(err => {
-    btn.disabled = false;
-    btn.classList.add("error");
-    icon.textContent = "✗";
-    label.textContent = "Fehler: " + err.message;
-    setTimeout(() => {
-      btn.classList.remove("error");
-      icon.textContent = "🔄";
-      label.textContent = "Neu generieren";
-    }, 4000);
-  });
+
+    setProgress(10, "Warte auf Workflow-Start…");
+    await sleep(5000);
+
+    // 2. Find the newly created run (within last 3 min)
+    let runId = null;
+    for (let i = 0; i < 12 && !runId; i++) {
+      const res = await fetch(
+        `https://api.github.com/repos/${REPO}/actions/runs?event=workflow_dispatch&per_page=5`,
+        { headers }
+      );
+      const data = await res.json();
+      const cutoff = Date.now() - 3 * 60 * 1000;
+      const fresh = (data.workflow_runs || []).find(
+        r => new Date(r.created_at).getTime() > cutoff
+      );
+      if (fresh) { runId = fresh.id; break; }
+      setProgress(10 + i, "Suche nach Workflow-Run…");
+      await sleep(3000);
+    }
+    if (!runId) throw new Error("Kein aktiver Workflow-Run gefunden");
+
+    setProgress(20, "Workflow gestartet");
+
+    // 3. Poll until complete — update bar based on real status + elapsed time
+    const pollStart = Date.now();
+    while (true) {
+      const res = await fetch(
+        `https://api.github.com/repos/${REPO}/actions/runs/${runId}`,
+        { headers }
+      );
+      const run = await res.json();
+      const elapsed = Date.now() - pollStart;
+
+      if (run.status === "queued") {
+        setProgress(20, "⏳ In Warteschlange…");
+      } else if (run.status === "in_progress") {
+        const pct = Math.min(90, 25 + (elapsed / 120_000) * 65);
+        const label =
+          elapsed < 30_000 ? "📡 Pharma-Quellen werden abgerufen…" :
+          elapsed < 80_000 ? "🤖 Briefing wird mit Claude generiert…" :
+                             "💾 Briefing wird gespeichert & gepusht…";
+        setProgress(pct, label);
+      } else if (run.status === "completed") {
+        if (run.conclusion === "success") {
+          setProgress(100, "✅ Fertig! Seite wird neu geladen…", "done");
+          await sleep(1800);
+          window.location.reload();
+          return;
+        } else {
+          throw new Error("Workflow fehlgeschlagen: " + run.conclusion);
+        }
+      }
+      await sleep(8000);
+    }
+  } catch (err) {
+    setProgress(100, "✗ " + err.message, "fail");
+    await sleep(3000);
+    resetBtn();
+  }
 }
 </script>
 </body>
