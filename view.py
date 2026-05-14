@@ -368,6 +368,26 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     color: var(--sidebar-text);
     margin-top: 4px;
   }
+  #refresh-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 7px 12px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  #refresh-btn:hover { background: #263244; color: #e2e8f0; border-color: #475569; }
+  #refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  #refresh-btn.success { color: #4ade80; border-color: #166534; }
+  #refresh-btn.error   { color: #f87171; border-color: #7f1d1d; }
   #nav {
     flex: 1;
     overflow-y: auto;
@@ -717,6 +737,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   <div id="sidebar-header">
     <h1>Pharma Digest</h1>
     <p id="count-label"></p>
+    <button id="refresh-btn" onclick="triggerRebuild()">
+      <span id="refresh-icon">🔄</span>
+      <span id="refresh-label">Neu generieren</span>
+    </button>
   </div>
   <div id="nav"></div>
 </nav>
@@ -766,6 +790,51 @@ function show(id) {
 }
 
 if (briefings.length > 0) show(briefings[0].id);
+
+function triggerRebuild() {
+  const hash = window.location.hash.slice(1);
+  const token = new URLSearchParams(hash).get("token");
+  if (!token) {
+    alert("Kein Token in der URL gefunden.\\n\\nBitte die Seite mit #token=DEIN_TOKEN aufrufen.");
+    return;
+  }
+  const btn = document.getElementById("refresh-btn");
+  const icon = document.getElementById("refresh-icon");
+  const label = document.getElementById("refresh-label");
+  btn.disabled = true;
+  icon.textContent = "⏳";
+  label.textContent = "Wird gestartet…";
+  fetch("https://api.github.com/repos/amelgit/pharma-digest/actions/workflows/digest.yml/dispatches", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ref: "main" }),
+  })
+  .then(r => {
+    if (r.ok || r.status === 204) {
+      btn.classList.add("success");
+      icon.textContent = "✓";
+      label.textContent = "Gestartet – in ~2 Min. neu laden";
+      setTimeout(() => window.location.reload(), 150000);
+    } else {
+      return r.json().then(j => { throw new Error(j.message || r.status); });
+    }
+  })
+  .catch(err => {
+    btn.disabled = false;
+    btn.classList.add("error");
+    icon.textContent = "✗";
+    label.textContent = "Fehler: " + err.message;
+    setTimeout(() => {
+      btn.classList.remove("error");
+      icon.textContent = "🔄";
+      label.textContent = "Neu generieren";
+    }, 4000);
+  });
+}
 </script>
 </body>
 </html>

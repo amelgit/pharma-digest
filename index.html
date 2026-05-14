@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharma Digest</title>
+<style>
+  :root {
+    --sidebar-bg: #0f172a;
+    --sidebar-text: #cbd5e1;
+    --sidebar-active: #f1f5f9;
+    --sidebar-hover: #1e293b;
+    --sidebar-accent: #0ea5e9;
+    --main-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --heading: #0f172a;
+    --border: #e2e8f0;
+    --hr: #e2e8f0;
+    --link: #0284c7;
+    --code-bg: #f1f5f9;
+    --today-badge: #0ea5e9;
+    --sidebar-w: 260px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--main-bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar ── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid #1e293b;
+  }
+  #sidebar-header h1 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  #sidebar-header p {
+    font-size: 12px;
+    color: var(--sidebar-text);
+    margin-top: 4px;
+  }
+  #nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+  }
+  #nav::-webkit-scrollbar { width: 4px; }
+  #nav::-webkit-scrollbar-track { background: transparent; }
+  #nav::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .nav-item:hover { background: var(--sidebar-hover); }
+  .nav-item.active {
+    background: #0c2d48;
+    border-left-color: var(--sidebar-accent);
+  }
+  .nav-date { flex: 1; }
+  .nav-weekday {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .nav-datestr {
+    font-size: 13px;
+    color: var(--sidebar-active);
+    font-weight: 500;
+    margin-top: 1px;
+  }
+  .nav-item.active .nav-datestr { color: #7dd3fc; }
+  .today-badge {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--today-badge);
+    color: white;
+    padding: 2px 7px;
+    border-radius: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Main content ── */
+  #main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+  }
+  #main::-webkit-scrollbar { width: 6px; }
+  #main::-webkit-scrollbar-track { background: var(--main-bg); }
+  #main::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  .briefing { display: none; }
+  .briefing.visible { display: block; }
+  .briefing-card {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+    padding: 40px 48px;
+  }
+  .briefing-card h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .briefing-card h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 32px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border);
+  }
+  .briefing-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--heading);
+    margin: 20px 0 8px;
+  }
+  .briefing-card p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #334155;
+    margin-bottom: 12px;
+  }
+  .briefing-card ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 8px;
+  }
+  .briefing-card ul li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #334155;
+    padding: 5px 0 5px 20px;
+    position: relative;
+  }
+  .briefing-card ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--sidebar-accent);
+    font-size: 13px;
+    top: 7px;
+  }
+  .briefing-card hr {
+    border: none;
+    border-top: 1px solid var(--hr);
+    margin: 24px 0;
+  }
+  .briefing-card strong { color: var(--heading); }
+  .briefing-card em { color: #475569; }
+  .briefing-card code {
+    background: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 13px;
+  }
+  .briefing-card a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  .briefing-card a:hover { text-decoration: underline; }
+
+  /* ── Market Widget ── */
+  .mkt-widget {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+  }
+  .mkt-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .mkt-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--heading);
+  }
+  .mkt-date-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .mkt-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .mkt-table th {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0 6px 6px;
+    border-bottom: 1px solid var(--border);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .mkt-table th:first-child { text-align: left; }
+  .mkt-table th:nth-child(3) { text-align: left; }
+  .mkt-table td {
+    padding: 5px 6px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+    font-size: 12px;
+  }
+  .mkt-table tr:last-child td { border-bottom: none; }
+  .mkt-name { font-weight: 600; color: var(--heading); white-space: nowrap; }
+  .mkt-close {
+    text-align: right;
+    font-family: "SF Mono", "Fira Code", monospace;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .mkt-range { min-width: 150px; padding-top: 7px !important; padding-bottom: 7px !important; }
+  .mkt-range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: var(--text-muted);
+    font-family: "SF Mono", "Fira Code", monospace;
+    margin-bottom: 3px;
+  }
+  .mkt-track {
+    height: 3px;
+    background: #e2e8f0;
+    border-radius: 2px;
+    position: relative;
+  }
+  .mkt-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--sidebar-accent);
+    border-radius: 50%;
+    top: -2.5px;
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 2px #f8fafc;
+  }
+  .mkt-pct {
+    text-align: right;
+    font-family: "SF Mono", "Fira Code", monospace;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .mkt-pos { color: #16a34a; }
+  .mkt-neg { color: #dc2626; }
+  .mkt-neutral { color: var(--text-muted); }
+  .mkt-day { border-left: 2px solid var(--border); }
+  .mkt-link { color: inherit; text-decoration: none; border-bottom: 1px dotted #94a3b8; }
+  .mkt-link:hover { color: var(--link); border-bottom-color: var(--link); }
+  .mkt-status { font-size: 9px; margin-right: 5px; }
+  .mkt-status-open   { color: #22c55e; }
+  .mkt-status-pre    { color: #f59e0b; }
+  .mkt-status-post   { color: #f59e0b; }
+  .mkt-status-closed { color: #cbd5e1; }
+  .mkt-pre {
+    display: block;
+    font-size: 10px;
+    font-family: "SF Mono", "Fira Code", monospace;
+    margin-top: 2px;
+  }
+  .mkt-pre-label { color: var(--text-muted); }
+  .mkt-pre-pos { color: #16a34a; }
+  .mkt-pre-neg { color: #dc2626; }
+  .mkt-analysis {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #0c2d48;
+  }
+  .mkt-analysis-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #0ea5e9;
+    margin-bottom: 6px;
+  }
+  .mkt-analysis p { margin: 0 0 6px; font-size: 13px; color: #0c2d48; line-height: 1.65; }
+  .mkt-analysis p:last-child { margin-bottom: 0; }
+
+  /* ── Sources ── */
+  .src-details {
+    margin-top: 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .src-summary {
+    cursor: pointer;
+    padding: 11px 16px;
+    background: #f8fafc;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    list-style: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .src-summary::-webkit-details-marker { display: none; }
+  .src-arrow { font-size: 9px; transition: transform 0.15s; display: inline-block; }
+  details[open] .src-arrow { transform: rotate(90deg); }
+  .src-body { padding: 16px 20px; }
+  .src-category { margin-bottom: 20px; }
+  .src-category:last-child { margin-bottom: 0; }
+  .src-category-name {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sidebar-accent);
+    margin-bottom: 10px;
+  }
+  .src-source { margin-bottom: 14px; }
+  .src-source:last-child { margin-bottom: 0; }
+  .src-source-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 5px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .src-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 4px 0;
+    border-bottom: 1px solid #f8fafc;
+  }
+  .src-item:last-child { border-bottom: none; }
+  .src-link {
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+    flex: 1;
+    line-height: 1.4;
+  }
+  .src-link:hover { color: var(--link); text-decoration: underline; }
+  .src-no-link { font-size: 13px; color: var(--text); flex: 1; line-height: 1.4; }
+  .src-date {
+    font-size: 10px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-family: "SF Mono", "Fira Code", monospace;
+    flex-shrink: 0;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    body { flex-direction: column; overflow: auto; height: auto; }
+    #sidebar { width: 100%; min-width: unset; height: auto; }
+    #nav { display: flex; overflow-x: auto; padding: 8px; gap: 6px; }
+    .nav-item { min-width: 130px; border-left: none; border-bottom: 3px solid transparent; border-radius: 8px; }
+    .nav-item.active { border-bottom-color: var(--sidebar-accent); }
+    #main { padding: 20px 16px; }
+    .briefing-card { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <h1>Pharma Digest</h1>
+    <p id="count-label"></p>
+  </div>
+  <div id="nav"></div>
+</nav>
+
+<main id="main">
+  <div id="content"></div>
+</main>
+
+<script>
+const briefings = [
+  {
+    "id": "2026-05-08",
+    "date": "2026-05-08",
+    "date_display": "8. Mai 2026",
+    "weekday": "Freitag",
+    "html": "<h1>Pharma-Briefing – 08. Mai 2026</h1>\n\n<hr>\n\n<h2>Einleitung</h2>\n\n<p>Der heutige Tag steht im Zeichen wegweisender klinischer Daten aus der Schlaganfall- und Onkologieforschung sowie strategischer Bewegungen im Pharmamarkt – allen voran der milliardenschwere US-Expansion von Angelini und das starke Debüt von Novo Nordisks oraler Semaglutid-Formulierung. Auf regulatorischer Seite sorgt die FDA mit mehreren ungewöhnlichen Entscheidungen für Gesprächsstoff, die das Vertrauen in Zulassungsprozesse und Kommunikationsstandards berühren.</p>\n\n<hr>\n\n<h2>🏭 Pharma-Industrie</h2>\n\n<ul>\n  <li><strong>Angelini übernimmt Catalyst Biosciences für 4,1 Mrd. USD:</strong> Das italienische Pharmaunternehmen setzt damit ein klares Signal für seine US-Wachsamkeitsstrategie. Die Transaktion unterstreicht den anhaltenden Konsolidierungsdruck im Markt – insbesondere für mittelgroße Unternehmen, die in der Neurologie und Psychiatrie aktiv sind, zwei Kernbereiche von Angelini.</li>\n</ul>\n\n<ul>\n  <li><strong>Novo Nordisks oraler Wegovy (Semaglutid-Tablette) erzielt 355 Mio. USD im Erstquartal:</strong> CEO Lars Fruergaard Jørgensen spricht von einem Preis-„Sweet Spot\", der Accessibilität und Margenerwartungen balanciert. Für Industrieapotheker relevant: Die orale Bioverfügbarkeit von GLP-1-Agonisten gilt nach wie vor als formulierungstechnische Herausforderung – der kommerzielle Erfolg bestätigt, dass diese überwunden ist.</li>\n</ul>\n\n<ul>\n  <li><strong>FDA überdenkt die Ablehnung der Zelltherapie Ebvallo (Tabelecleucel):</strong> Die überraschende Ablehnung der EBV-spezifischen T-Zell-Therapie war ein Rückschlag für den Hersteller Pierre Fabre. Die FDA-Bereitschaft zur Neuprüfung ist ein positives Signal für die Zelltherapie-Pipeline insgesamt – und könnte präzedenzwirksam für uniQure und andere sein.</li>\n</ul>\n\n<ul>\n  <li><strong>FDA rügt Alnylam wegen Wirksamkeitsbehauptungen auf der Amvuttra-Website:</strong> Die FDA kritisierte irreführende Effektivitätsangaben für den RNAi-Wirkstoff Vutrisiran (ATTR-Amyloidose). Für Regulatory-Affairs-Teams ein Warnsignal: Auch digitale Kommunikationskanäle unterliegen strenger Werbeaufsicht – Compliance-Überprüfungen von Online-Inhalten sind essenziell.</li>\n</ul>\n\n<ul>\n  <li><strong>FDA blockiert Veröffentlichung von Sicherheitsstudien zu COVID- und Gürtelrose-Impfstoffen (NYT):</strong> Laut <em>New York Times</em> verhindert die FDA die Publikation behördlich beauftragter Sicherheitsanalysen. Dies ist im Kontext der aktuellen politischen Einflussnahme auf US-Gesundheitsbehörden besorgniserregend und könnte das internationale Vertrauen in regulatorische Transparenz beschädigen – ein Thema, das auch für EMA und AGES relevant ist.</li>\n</ul>\n\n<hr>\n\n<h2>🔬 Klinische Forschung</h2>\n\n<ul>\n  <li><strong>TAPIS-Studie (Lancet): Duale Thrombozytenhemmung plus Thrombolyse beim ischämischen Schlaganfall:</strong> Die randomisierte, doppelblinde chinesische Multicenterstudie zeigt positive Ergebnisse für Ticagrelor plus Aspirin in Kombination mit intravenöser Thrombolyse bei einem definierten Schlaganfallphänotyp. Die begleitenden Kommentare betonen die Relevanz der Patientenselektion – ein wichtiges Signal für zukünftige Leitlinienentwicklungen in der Schlaganfalltherapie.</li>\n</ul>\n\n<ul>\n  <li><strong>ATLAS-Metaanalyse (Lancet): Thrombektomie bis 24 h nach Schlaganfall auch bei großem Infarkt-Core wirksam:</strong> Die individuelle Patientendaten-Metaanalyse bestätigt den Nutzen der endovaskulären Thrombektomie auch bei ausgedehnten Infarkten (niedrige ASPECTS-Scores) bis zu 24 Stunden nach Symptombeginn. Dies erweitert das therapeutische Fenster erheblich und hat direkte Implikationen für die Schlaganfallversorgung und Arzneimittelkombinationstherapien im periinterventionellen Setting.</li>\n</ul>\n\n<ul>\n  <li><strong>Daraxonrasib bei vorbehandeltem RAS-mutiertem Pankreaskarzinom (NEJM):</strong> Daten zum ersten oral verfügbaren KRAS-Inhibitor in dieser Indikation werden im NEJM publiziert. Pancreaskarzinom mit RAS-Mutation gilt als therapeutisch besonders schwer zugänglich – positive Wirksamkeitssignale wären ein bedeutsamer Fortschritt in der Onkologie.</li>\n</ul>\n\n<ul>\n  <li><strong>mRNA-Influenza-Impfstoff: Wirksamkeit und Sicherheit in Erwachsenen (NEJM):</strong> Die Publikation liefert erstmals robuste klinische Phase-III-Daten für einen saisonalen mRNA-Grippe-Impfstoff. Angesichts der etablierten mRNA-Plattform nach COVID-19 ist dies ein strategisch relevanter Datenpunkt für Impfstoffhersteller und den Markt für saisonale Impfungen.</li>\n</ul>\n\n<ul>\n  <li><strong>Base Editing bei Sichelzellkrankheit – Editierung der HBG1/HBG2-Promotoren (NEJM):</strong> Der Ansatz zur Reaktivierung fötalen Hämoglobins via Basenpaar-Editierung zeigt die fortschreitende Reife von Gen-Editing-Technologien jenseits von CRISPR-Cas9. Sicherheits- und Effizienzprofile dieser Methode sind für die weitere klinische Entwicklung entscheidend – die NEJM-Publikation dürfte ein Meilenstein in der Gentherapie der Hämoglobinopathien sein.</li>\n</ul>\n\n<hr>\n\n<h2>⚠️ Regulatorisches</h2>\n\n<p><em>Für den 08.05.2026 liegen keine eigenständigen regulatorischen Meldungen vor.</em> Dennoch ergeben sich aus der Industrieberichterstattung regulatorisch relevante Signale:</p>\n\n<ul>\n  <li>Die <strong>FDA-Kritik an Alnylams Amvuttra-Website</strong> verdeutlicht, dass digitale Werbung konsequent auf Compliance zu prüfen ist.</li>\n  <li>Die <strong>geplante Neuprüfung von Ebvallo</strong> zeigt, dass unerwartete FDA-Ablehnungen nicht zwingend endgültig sind – Unternehmen sollten Eskalationspfade kennen und nutzen.</li>\n  <li>Das <strong>Blockieren von Impfstoff-Sicherheitsstudien</strong> durch die FDA ist ein regulatorisches Governance-Thema, das international beobachtet werden sollte.</li>\n</ul>\n\n<hr>\n\n<h2>📅 Ausblick</h2>\n\n<p>Die vollständigen Studiendaten zu Daraxonrasib und dem mRNA-Influenza-Impfstoff aus dem aktuellen NEJM-Heft sollten in den kommenden Tagen genau analysiert werden – beide Projekte haben das Potenzial, bestehende Therapiestandards zu verschieben. Parallel bleibt die Entwicklung rund um die FDA-Governance-Krise im Blick zu behalten: Sollten weitere Fälle von zurückgehaltenen Sicherheitsdaten bekannt werden, könnte dies internationale Regulierungsdiskussionen – auch auf EMA-Ebene –</p><details class=\"src-details\"><summary class=\"src-summary\"><span class=\"src-arrow\">▶</span>📰 Quellen &amp; Schlagzeilen (30 Artikel)</summary><div class=\"src-body\"><div class=\"src-category\"><div class=\"src-category-name\">Pharma-Industrie</div><div class=\"src-source\"><div class=\"src-source-name\">Fierce Pharma</div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/marketing/pre-launch-efforts-linked-lasting-drug-awareness-edge-report\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/marketing/pre-launch-efforts-linked-lasting-drug-awareness-edge-report\" hreflang=\"en\"&gt;Pre-launch efforts linked to lasting drug awareness edge: report&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/pharma/angelini-finds-catalyst-its-us-growth-ambitions-41b-buyout\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/pharma/angelini-finds-catalyst-its-us-growth-ambitions-41b-buyout\" hreflang=\"en\"&gt;Angelini finds Catalyst for its US growth ambitions with $4.1B buyout&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/manufacturing/timing-right-psychedelics-manufacturer-optimi-health\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/manufacturing/timing-right-psychedelics-manufacturer-optimi-health\" hreflang=\"en\"&gt;The timing is right for psychedelics manufacturer Optimi Health's IPO&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/pharma/fda-reconsider-surprisingly-rejected-cell-therapy-ebvallo-could-uniqure-be-next\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/pharma/fda-reconsider-surprisingly-rejected-cell-therapy-ebvallo-could-uniqure-be-next\" hreflang=\"en\"&gt;FDA to reconsider shock rejection of cell therapy Ebvallo. Could uniQure be next?&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/marketing/insulet-ceo-details-scrubs-device-promotion-win-it-boosts-awareness-education-drive\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/marketing/insulet-ceo-details-scrubs-device-promotion-win-it-boosts-awareness-education-drive\" hreflang=\"en\"&gt;Insulet CEO details ‘Scrubs’ device promotion win as it boosts awareness, education drive &lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/marketing/alnylam-rebuked-fda-over-efficacy-claims-amvuttra-website\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/marketing/alnylam-rebuked-fda-over-efficacy-claims-amvuttra-website\" hreflang=\"en\"&gt;Alnylam rebuked by FDA over efficacy claims on Amvuttra website&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/pharma/sanofi-requests-exit-controversial-cnpv-fast-track-program-stat\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/pharma/sanofi-requests-exit-controversial-cnpv-fast-track-program-stat\" hreflang=\"en\"&gt;Sanofi asks to pull Tzield bid from FDA's controversial CNPV program: report&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/manufacturing/fda-rolls-out-1-day-assessment-pilot-bid-refocus-inspection-resources\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/manufacturing/fda-rolls-out-1-day-assessment-pilot-bid-refocus-inspection-resources\" hreflang=\"en\"&gt;FDA rolls out 1-day assessment pilot in bid to refocus inspection resources&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/pharma/novo-ceo-cites-wegovy-pill-pricing-sweet-spot-oral-obesity-launch-garners-355m-its-1st\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/pharma/novo-ceo-cites-wegovy-pill-pricing-sweet-spot-oral-obesity-launch-garners-355m-its-1st\" hreflang=\"en\"&gt;Novo CEO cites pricing 'sweet spot' as Wegovy pill debuts with $355M quarter&lt;/a&gt;</a></div><div class=\"src-item\"><a href=\"https://www.fiercepharma.com/pharma/fda-blocks-publication-covid-shingles-vaccine-safety-studies-nyt\" target=\"_blank\" class=\"src-link\">&lt;a href=\"https://www.fiercepharma.com/pharma/fda-blocks-publication-covid-shingles-vaccine-safety-studies-nyt\" hreflang=\"en\"&gt;FDA blocks publication of COVID, shingles vaccine safety studies: NYT &lt;/a&gt;</a></div></div></div><div class=\"src-category\"><div class=\"src-category-name\">Klinische Forschung</div><div class=\"src-source\"><div class=\"src-source-name\">NEJM</div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMoa2505783?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Daraxonrasib in Previously Treated Advanced RAS-Mutated Pancreatic Cancer</a><span class=\"src-date\">06.05.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMoa2516491?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Efficacy and Safety of an mRNA Seasonal Influenza Vaccine in Adults</a><span class=\"src-date\">06.05.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMoa2411721?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Combined Oral Ivermectin and 5% Permethrin Cream to Treat Severe Scabies</a><span class=\"src-date\">06.05.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMoa2504835?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Base Editing of HBG1 and HBG2 Promoters for Sickle Cell Disease</a><span class=\"src-date\">01.04.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMoa2515704?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Left Ventricular Unloading in High-Risk Percutaneous Coronary Intervention</a><span class=\"src-date\">29.03.2026, 01:32</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMra2411298?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Cerebral Amyloid Angiopathy</a><span class=\"src-date\">06.05.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMc2602513?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Antithrombotic Therapy after Ablation for Atrial Fibrillation</a><span class=\"src-date\">06.05.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMc2602975?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Trial of the Oral PCSK9 Inhibitor Enlicitide</a><span class=\"src-date\">06.05.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMc2600589?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">Reducing Bacterial Contamination of Blood Bags with a Double Knot</a><span class=\"src-date\">06.05.2026, 09:00</span></div><div class=\"src-item\"><a href=\"https://www.nejm.org/doi/full/10.1056/NEJMc2507760?af=R&rss=currentIssue\" target=\"_blank\" class=\"src-link\">An Evidence-Based Approach to Covid-19 Vaccination</a><span class=\"src-date\">09.07.2025, 09:00</span></div></div><div class=\"src-source\"><div class=\"src-source-name\">The Lancet</div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00820-2/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Comment] TAPIS: a positive trial in a defined phenotype</a><span class=\"src-date\">08.05.2026, 09:52</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00757-9/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Articles] Ticagrelor with aspirin dual antiplatelet therapy combined with intravenous thrombolysis in patients with ischaemic stroke in China (TAPIS): a multicentre, double-blind, randomised controlled trial</a><span class=\"src-date\">08.05.2026, 09:52</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00876-7/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Articles] Endovascular thrombectomy for patients with large-core ischaemic stroke presenting up to 24 h after onset (ATLAS): a systematic review and individual patient data meta-analysis with central imaging adjudication</a><span class=\"src-date\">07.05.2026, 09:04</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00873-1/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Comment] Is ATLAS lifting the burden of stroke in people with large-vessel occlusion and low ASPECTS scores?</a><span class=\"src-date\">07.05.2026, 09:04</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00379-X/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Viewpoint] The role of community-based blood pressure screening in improving hypertension care</a><span class=\"src-date\">06.05.2026, 22:30</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00204-7/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Viewpoint] Who's really in the loop? Rethinking oversight in AI-assisted health care</a><span class=\"src-date\">30.04.2026, 22:30</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00807-X/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Comment] The Lancet Commission on the European Health Union: strengthening the union for and through health</a><span class=\"src-date\">29.04.2026, 22:30</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00805-6/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Comment] A WHO worth fighting for: the case for focused, ambitious reform</a><span class=\"src-date\">29.04.2026, 22:30</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00756-7/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Comment] From prediction to navigation for artificial intelligence in medicine</a><span class=\"src-date\">27.04.2026, 22:30</span></div><div class=\"src-item\"><a href=\"https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00806-8/fulltext?rss=yes\" target=\"_blank\" class=\"src-link\">[Perspectives] The art of Julia Davenne</a><span class=\"src-date\">24.04.2026, 22:30</span></div></div></div></div></details>"
+  }
+];
+
+const today = new Date().toISOString().slice(0, 10);
+const nav = document.getElementById("nav");
+const content = document.getElementById("content");
+
+document.getElementById("count-label").textContent =
+  briefings.length + " Ausgabe" + (briefings.length !== 1 ? "n" : "");
+
+briefings.forEach((b, i) => {
+  const item = document.createElement("div");
+  item.className = "nav-item";
+  item.dataset.id = b.id;
+  const isToday = b.date === today;
+  item.innerHTML = `
+    <div class="nav-date">
+      <div class="nav-weekday">${b.weekday}</div>
+      <div class="nav-datestr">${b.date_display}</div>
+    </div>
+    ${isToday ? '<span class="today-badge">Heute</span>' : ""}
+  `;
+  item.addEventListener("click", () => show(b.id));
+  nav.appendChild(item);
+
+  const panel = document.createElement("div");
+  panel.className = "briefing";
+  panel.id = "briefing-" + b.id;
+  panel.innerHTML = `<div class="briefing-card">${b.html}</div>`;
+  content.appendChild(panel);
+});
+
+function show(id) {
+  document.querySelectorAll(".briefing").forEach(el => el.classList.remove("visible"));
+  document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
+  document.getElementById("briefing-" + id)?.classList.add("visible");
+  document.querySelector(`.nav-item[data-id="${id}"]`)?.classList.add("active");
+  document.getElementById("main").scrollTo(0, 0);
+}
+
+if (briefings.length > 0) show(briefings[0].id);
+</script>
+</body>
+</html>
