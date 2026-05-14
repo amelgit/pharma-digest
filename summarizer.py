@@ -46,7 +46,7 @@ def generate_briefing(headlines_by_category: dict, model: str) -> str:
 
     response = client.messages.create(
         model=model,
-        max_tokens=2048,
+        max_tokens=3000,
         system=[
             {
                 "type": "text",

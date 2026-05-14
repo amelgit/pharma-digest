@@ -5,6 +5,7 @@ import subprocess
 import yaml
 import logging
 from datetime import date, datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from scraper import scrape_source
 from summarizer import generate_briefing, generate_market_analysis
@@ -116,7 +117,7 @@ def main() -> None:
         payload = {
             "instruments": market,
             "analysis": analysis,
-            "fetched_at": datetime.now().strftime("%d.%m.%Y, %H:%M"),
+            "fetched_at": datetime.now(tz=ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y, %H:%M"),
         }
         market_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         logger.info(f"Marktdaten gespeichert: {market_path}")

@@ -154,9 +154,9 @@ def render_market_widget(instruments: list, fetched_at: str = "") -> str:
             f'<div class="mkt-range-labels"><span>{w52l}</span><span>{w52h}</span></div>'
             f'<div class="mkt-track"><div class="mkt-dot" style="left:{pos:.1f}%"></div></div>'
             f'</td>'
-            f'{pct_td(item.get("ytd_pct"))}'
-            f'{pct_td(item.get("month_pct"))}'
             f'{pct_td(item.get("week_pct"))}'
+            f'{pct_td(item.get("month_pct"))}'
+            f'{pct_td(item.get("ytd_pct"))}'
             f'</tr>'
         )
 
@@ -178,7 +178,7 @@ def render_market_widget(instruments: list, fetched_at: str = "") -> str:
         '<th>Unternehmen / ETF</th><th>Letzter Kurs</th>'
         '<th>Δ 1T</th><th>1T %</th>'
         '<th>52W-Bereich</th>'
-        '<th>YTD</th><th>1M</th><th>1W</th>'
+        '<th>1W</th><th>1M</th><th>YTD</th>'
         '</tr></thead><tbody>'
         + "".join(rows)
         + '</tbody></table>'
@@ -188,13 +188,22 @@ def render_market_widget(instruments: list, fetched_at: str = "") -> str:
 def render_market_analysis(analysis: str) -> str:
     if not analysis:
         return '</div>\n\n'
-    safe = (analysis
-            .replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-            .replace("\n\n", "</p><p>").replace("\n", " "))
+    paras = []
+    for block in analysis.strip().split("\n\n"):
+        lines = []
+        for line in block.split("\n"):
+            line = re.sub(r'^#{1,4}\s+', '', line.strip())
+            if not line:
+                continue
+            escaped = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            lines.append(inline_md(escaped))
+        if lines:
+            paras.append(" ".join(lines))
+    body = "".join(f"<p>{p}</p>" for p in paras)
     return (
         '<div class="mkt-analysis">'
         '<div class="mkt-analysis-title">🔍 Kursbewegungen &amp; Pharma-Nachrichten</div>'
-        f'<p>{safe}</p>'
+        + body +
         '</div>'
         '</div>\n\n'
     )
@@ -527,6 +536,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     border-radius: 10px;
     padding: 18px 22px;
     margin-bottom: 28px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .mkt-header {
     display: flex;
@@ -547,6 +558,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }
   .mkt-table {
     width: 100%;
+    min-width: 540px;
     border-collapse: collapse;
   }
   .mkt-table th {
@@ -576,7 +588,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     color: var(--text);
     white-space: nowrap;
   }
-  .mkt-range { min-width: 150px; padding-top: 7px !important; padding-bottom: 7px !important; }
+  .mkt-range { min-width: 120px; padding-top: 7px !important; padding-bottom: 7px !important; }
   .mkt-range-labels {
     display: flex;
     justify-content: space-between;
@@ -728,6 +740,11 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     .nav-item.active { border-bottom-color: var(--sidebar-accent); }
     #main { padding: 20px 16px; }
     .briefing-card { padding: 24px 20px; }
+    .mkt-widget { padding: 14px 14px; }
+    /* hide 52W range, 1M, YTD on small screens — keep name, price, Δ1T, 1T%, 1W */
+    .mkt-table th:nth-child(5), .mkt-table td:nth-child(5),
+    .mkt-table th:nth-child(7), .mkt-table td:nth-child(7),
+    .mkt-table th:nth-child(8), .mkt-table td:nth-child(8) { display: none; }
   }
 </style>
 </head>

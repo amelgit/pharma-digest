@@ -218,6 +218,8 @@
     border-radius: 10px;
     padding: 18px 22px;
     margin-bottom: 28px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .mkt-header {
     display: flex;
@@ -238,6 +240,7 @@
   }
   .mkt-table {
     width: 100%;
+    min-width: 540px;
     border-collapse: collapse;
   }
   .mkt-table th {
@@ -267,7 +270,7 @@
     color: var(--text);
     white-space: nowrap;
   }
-  .mkt-range { min-width: 150px; padding-top: 7px !important; padding-bottom: 7px !important; }
+  .mkt-range { min-width: 120px; padding-top: 7px !important; padding-bottom: 7px !important; }
   .mkt-range-labels {
     display: flex;
     justify-content: space-between;
@@ -419,6 +422,11 @@
     .nav-item.active { border-bottom-color: var(--sidebar-accent); }
     #main { padding: 20px 16px; }
     .briefing-card { padding: 24px 20px; }
+    .mkt-widget { padding: 14px 14px; }
+    /* hide 52W range, 1M, YTD on small screens — keep name, price, Δ1T, 1T%, 1W */
+    .mkt-table th:nth-child(5), .mkt-table td:nth-child(5),
+    .mkt-table th:nth-child(7), .mkt-table td:nth-child(7),
+    .mkt-table th:nth-child(8), .mkt-table td:nth-child(8) { display: none; }
   }
 </style>
 </head>
