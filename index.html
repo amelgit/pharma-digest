@@ -537,64 +537,80 @@ const RUN_KEY = "pharma_digest_run";
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// ── Persist run state across page reloads ──
-function saveRun(runId, startTime) {
-  try { localStorage.setItem(RUN_KEY, JSON.stringify({ runId, startTime })); } catch(e) {}
-}
-function clearRun() {
-  try { localStorage.removeItem(RUN_KEY); } catch(e) {}
-}
-function loadRun() {
+// Store only the dispatch timestamp — runId is always re-fetched so we never
+// hit the race where the user reloads before the runId is known.
+function saveDispatch(t) { try { localStorage.setItem(RUN_KEY, String(t)); } catch(e) {} }
+function clearRun()       { try { localStorage.removeItem(RUN_KEY); } catch(e) {} }
+function loadDispatch() {
   try {
-    const s = localStorage.getItem(RUN_KEY);
-    if (!s) return null;
-    const state = JSON.parse(s);
-    if (Date.now() - state.startTime > 15 * 60 * 1000) { clearRun(); return null; }
-    return state;
+    const t = parseInt(localStorage.getItem(RUN_KEY) || "");
+    if (!t) return null;
+    if (Date.now() - t > 15 * 60 * 1000) { clearRun(); return null; }
+    return t;
   } catch(e) { return null; }
 }
 
 function setProgress(pct, text, state) {
-  const fill = document.getElementById("prog-fill");
   document.getElementById("prog-wrap").style.display = "block";
+  const fill = document.getElementById("prog-fill");
   fill.style.width = pct + "%";
   fill.className = "prog-fill" + (state === "done" ? " done" : state === "fail" ? " fail" : "");
-  if (text) document.getElementById("prog-status").textContent = text;
+  if (text != null) document.getElementById("prog-status").textContent = text;
 }
-
 function setBusy() {
-  const btn = document.getElementById("refresh-btn");
-  btn.disabled = true;
+  document.getElementById("refresh-btn").disabled = true;
   document.getElementById("refresh-icon").textContent = "⏳";
   document.getElementById("refresh-label").textContent = "Läuft…";
 }
-
 function resetBtn() {
-  const btn = document.getElementById("refresh-btn");
-  btn.disabled = false;
-  btn.classList.remove("success", "error");
+  document.getElementById("refresh-btn").disabled = false;
   document.getElementById("refresh-icon").textContent = "🔄";
   document.getElementById("refresh-label").textContent = "Neu generieren";
   document.getElementById("prog-wrap").style.display = "none";
   document.getElementById("prog-fill").style.width = "0%";
 }
+function makeHeaders(token) {
+  return {
+    "Authorization": "Bearer " + token,
+    "Accept": "application/vnd.github+json",
+    "Content-Type": "application/json",
+  };
+}
 
-// ── Core polling loop (shared by fresh trigger and page-reload resume) ──
-async function pollUntilDone(runId, pollStart, headers) {
+// Find the workflow_dispatch run created at or after dispatchTime (±30s clock buffer).
+// Retries for up to ~60s so it works whether the tab was reloaded immediately or later.
+async function findRun(dispatchTime, headers) {
+  for (let i = 0; i < 15; i++) {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/actions/runs?event=workflow_dispatch&per_page=5`,
+      { headers }
+    );
+    if (!res.ok) throw new Error("API-Fehler: " + res.status);
+    const runs = (await res.json()).workflow_runs || [];
+    // Runs are newest-first; find the first one created after our dispatch
+    const run = runs.find(r => new Date(r.created_at).getTime() >= dispatchTime - 30_000);
+    if (run) return run;
+    await sleep(4000);
+  }
+  return null;
+}
+
+async function pollUntilDone(runId, dispatchTime, headers) {
   while (true) {
     const res = await fetch(
       `https://api.github.com/repos/${REPO}/actions/runs/${runId}`,
       { headers }
     );
+    if (!res.ok) throw new Error("API-Fehler: " + res.status);
     const run = await res.json();
-    const elapsed = Date.now() - pollStart;
+    const elapsed = Date.now() - dispatchTime;
 
     if (run.status === "queued") {
-      setProgress(20, "⏳ In Warteschlange…");
+      setProgress(15, "⏳ In Warteschlange…");
     } else if (run.status === "in_progress") {
-      const pct = Math.min(90, 25 + (elapsed / 120_000) * 65);
+      const pct = Math.min(90, 20 + (elapsed / 120_000) * 70);
       const label =
-        elapsed < 30_000 ? "📡 Pharma-Quellen werden abgerufen…" :
+        elapsed < 35_000 ? "📡 Pharma-Quellen werden abgerufen…" :
         elapsed < 80_000 ? "🤖 Briefing wird mit Claude generiert…" :
                            "💾 Briefing wird gespeichert & gepusht…";
       setProgress(pct, label);
@@ -606,7 +622,7 @@ async function pollUntilDone(runId, pollStart, headers) {
         window.location.reload();
         return;
       } else {
-        throw new Error("Workflow fehlgeschlagen: " + run.conclusion);
+        throw new Error("Fehlgeschlagen: " + run.conclusion);
       }
     }
     await sleep(8000);
@@ -614,56 +630,37 @@ async function pollUntilDone(runId, pollStart, headers) {
 }
 
 async function triggerRebuild() {
-  const hash = window.location.hash.slice(1);
-  const token = new URLSearchParams(hash).get("token");
+  const token = new URLSearchParams(window.location.hash.slice(1)).get("token");
   if (!token) {
     alert("Kein Token in der URL gefunden.\n\nBitte die Seite mit #token=DEIN_TOKEN aufrufen.");
     return;
   }
   setBusy();
   setProgress(5, "Verbindung zu GitHub…");
-
-  const headers = {
-    "Authorization": "Bearer " + token,
-    "Accept": "application/vnd.github+json",
-    "Content-Type": "application/json",
-  };
+  const headers = makeHeaders(token);
 
   try {
-    const dispatchRes = await fetch(
+    const res = await fetch(
       `https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
       { method: "POST", headers, body: JSON.stringify({ ref: "main" }) }
     );
-    if (!dispatchRes.ok) {
-      const j = await dispatchRes.json().catch(() => ({}));
-      throw new Error(j.message || "HTTP " + dispatchRes.status);
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      throw new Error(j.message || "HTTP " + res.status);
     }
 
-    setProgress(10, "Warte auf Workflow-Start…");
+    // Save timestamp IMMEDIATELY after confirmed dispatch — before any run search —
+    // so a page reload at any point can still resume.
+    const dispatchTime = Date.now();
+    saveDispatch(dispatchTime);
+    setProgress(10, "Workflow ausgelöst – suche Run…");
     await sleep(5000);
 
-    let runId = null;
-    for (let i = 0; i < 12 && !runId; i++) {
-      const res = await fetch(
-        `https://api.github.com/repos/${REPO}/actions/runs?event=workflow_dispatch&per_page=5`,
-        { headers }
-      );
-      const data = await res.json();
-      const cutoff = Date.now() - 3 * 60 * 1000;
-      const fresh = (data.workflow_runs || []).find(
-        r => new Date(r.created_at).getTime() > cutoff
-      );
-      if (fresh) { runId = fresh.id; break; }
-      setProgress(10 + i, "Suche nach Workflow-Run…");
-      await sleep(3000);
-    }
-    if (!runId) throw new Error("Kein aktiver Workflow-Run gefunden");
+    const run = await findRun(dispatchTime, headers);
+    if (!run) throw new Error("Kein Workflow-Run gefunden");
 
-    const pollStart = Date.now();
-    saveRun(runId, pollStart);
     setProgress(20, "Workflow gestartet");
-
-    await pollUntilDone(runId, pollStart, headers);
+    await pollUntilDone(run.id, dispatchTime, headers);
   } catch (err) {
     clearRun();
     setProgress(100, "✗ " + err.message, "fail");
@@ -672,23 +669,29 @@ async function triggerRebuild() {
   }
 }
 
-// ── On page load: resume polling if a run was in progress before reload ──
+// On every page load: if a dispatch timestamp is saved, find and resume the run.
 (async function resumeIfActive() {
-  const state = loadRun();
-  if (!state) return;
+  const dispatchTime = loadDispatch();
+  if (!dispatchTime) return;
   const token = new URLSearchParams(window.location.hash.slice(1)).get("token");
   if (!token) { clearRun(); return; }
+
   setBusy();
-  const elapsed = Date.now() - state.startTime;
-  const pct = Math.min(85, 20 + (elapsed / 120_000) * 65);
-  setProgress(pct, "Fortschritt wird wiederhergestellt…");
-  const headers = {
-    "Authorization": "Bearer " + token,
-    "Accept": "application/vnd.github+json",
-    "Content-Type": "application/json",
-  };
+  const elapsed = Date.now() - dispatchTime;
+  setProgress(Math.min(85, 10 + (elapsed / 120_000) * 75), "Verbinde mit laufendem Workflow…");
+  const headers = makeHeaders(token);
+
   try {
-    await pollUntilDone(state.runId, state.startTime, headers);
+    const run = await findRun(dispatchTime, headers);
+    if (!run) {
+      // Not found: run likely completed before this reload and the tab was closed
+      // (clearRun was never called). Reset cleanly.
+      clearRun();
+      resetBtn();
+      return;
+    }
+    // If already completed, pollUntilDone handles it immediately (success → reload, else error)
+    await pollUntilDone(run.id, dispatchTime, headers);
   } catch (err) {
     clearRun();
     setProgress(100, "✗ " + err.message, "fail");
