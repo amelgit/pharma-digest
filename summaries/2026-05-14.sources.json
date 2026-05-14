@@ -1,169 +1,57 @@
 [
   {
-    "category": "Pharma-Industrie",
-    "source": "Fierce Pharma",
+    "category": "MedTech-Industrie",
+    "source": "MedTech Dive",
     "items": [
       {
-        "title": "BeOne's Venclexta challenger Beqalzi nets FDA approval as first BCL-2 for mantle cell lymphoma",
-        "url": "https://www.fiercepharma.com/pharma/beone-venclexta-challenger-beqalzi-sonrotoclax-nets-fda-approval-first-bcl-2-mantle-cell",
-        "published": ""
+        "title": "4 medtech manufacturers recall kits over problem with Medline syringes",
+        "url": "https://www.medtechdive.com/news/4-medtech-manufacturers-recall-kits-over-problem-with-medline-syringes/820181/",
+        "published": "13.05.2026, 20:29"
       },
       {
-        "title": "As Trump arrives in China, Big Pharma CEOs are notably absent",
-        "url": "https://www.fiercepharma.com/pharma/trump-arrives-china-big-pharma-ceos-are-notably-absent",
-        "published": ""
+        "title": "J&J launches improved Shockwave catheter",
+        "url": "https://www.medtechdive.com/news/jj-launches-improved-shockwave-catheter/820121/",
+        "published": "13.05.2026, 15:08"
       },
       {
-        "title": "Merck KGaA looks to M&A to bolster its 'rather slim' pipeline",
-        "url": "https://www.fiercepharma.com/pharma/merck-kgaa-looks-ma-bolster-its-rather-slim-pipeline",
-        "published": ""
+        "title": "Artera gets FDA clearance for AI breast cancer risk prediction tool",
+        "url": "https://www.medtechdive.com/news/artera-gets-fda-clearance-for-ai-breast-cancer-risk-prediction-tool/819665/",
+        "published": "12.05.2026, 19:44"
       },
       {
-        "title": "Takeda, slimming down for 'new era,' plots 4,500 layoffs in latest restructuring drive",
-        "url": "https://www.fiercepharma.com/pharma/takeda-slimming-down-new-era-plots-4500-layoffs-latest-restructuring-drive",
-        "published": ""
+        "title": "FDA chief Marty Makary resigns from agency, ending tumultuous tenure",
+        "url": "https://www.medtechdive.com/news/makary-fda-commissioner-resign-trump/820009/",
+        "published": "12.05.2026, 18:36"
       },
       {
-        "title": "Novo, Lilly tout respective early response and weight loss maintenance data as GLP-1 rivalry intensifies",
-        "url": "https://www.fiercepharma.com/pharma/novo-lilly-tout-respective-early-response-and-weight-loss-maintenance-data-glp-1-obesity",
-        "published": ""
+        "title": "Bayesian Health gets FDA nod for AI sepsis detection tool",
+        "url": "https://www.medtechdive.com/news/bayesian-health-gets-fda-nod-for-ai-sepsis-detection-tool/819989/",
+        "published": "12.05.2026, 15:55"
       },
       {
-        "title": "BeOne Medicines’ Brukinsa TV ad 'Clarity' hit by FDA over 'misleading suggestions'",
-        "url": "https://www.fiercepharma.com/marketing/beone-medicines-tv-drug-ad-clarity-hit-fda-watchdog-misleading-suggestions",
-        "published": ""
+        "title": "Stryker values Amplitude Vascular purchase at up to $835M",
+        "url": "https://www.medtechdive.com/news/stryker-values-amplitude-vascular-purchase-at-up-to-835m/819976/",
+        "published": "12.05.2026, 14:56"
       },
       {
-        "title": "Haleon tackles sports injuries with latest soccer play",
-        "url": "https://www.fiercepharma.com/marketing/haleon-tackles-sports-injuries-latest-soccer-play",
-        "published": ""
+        "title": "HistoSonics seeks FDA de novo authorization in kidney cancer",
+        "url": "https://www.medtechdive.com/news/histosonics-seeks-fda-de-novo-authorization-in-kidney-cancer/819931/",
+        "published": "12.05.2026, 08:27"
       },
       {
-        "title": "Regulatory tracker: Pfizer nabs Hympavzi hemophilia expansion in Europe",
-        "url": "https://www.fiercepharma.com/pharma/fierce-pharma-regulatory-tracker-2026",
-        "published": ""
+        "title": "Medtronic to close California site amid restructuring",
+        "url": "https://www.medtechdive.com/news/medtronic-to-close-california-site-amid-restructuring/819852/",
+        "published": "11.05.2026, 15:10"
       },
       {
-        "title": "Valneva to lay off up to 15% of workforce in face of ‘adverse trend’ in travel vaccines",
-        "url": "https://www.fiercepharma.com/biotech/valneva-lay-15-workforce-face-adverse-trend-travel-vaccine-uptake",
-        "published": ""
+        "title": "Mobia Medical CEO eyes large market for stroke rehab",
+        "url": "https://www.medtechdive.com/news/mobia-medical-ceo-eyes-large-market-for-stroke-rehab/819847/",
+        "published": "11.05.2026, 14:53"
       },
       {
-        "title": "BioMarin consolidates staff at Amicus HQ after closing $4.8B deal for rare disease peer",
-        "url": "https://www.fiercepharma.com/pharma/biomarin-consolidates-staff-amicus-hq-after-closing-48b-deal-rare-disease-peer",
-        "published": ""
-      }
-    ]
-  },
-  {
-    "category": "Klinische Forschung",
-    "source": "NEJM",
-    "items": [
-      {
-        "title": "Efficacy and Safety of an mRNA Seasonal Influenza Vaccine in Adults",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2516491?af=R&rss=currentIssue",
-        "published": "06.05.2026, 09:00"
-      },
-      {
-        "title": "Combined Oral Ivermectin and 5% Permethrin Cream to Treat Severe Scabies",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2411721?af=R&rss=currentIssue",
-        "published": "06.05.2026, 09:00"
-      },
-      {
-        "title": "Base Editing of HBG1 and HBG2 Promoters for Sickle Cell Disease",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2504835?af=R&rss=currentIssue",
-        "published": "01.04.2026, 09:00"
-      },
-      {
-        "title": "Left Ventricular Unloading in High-Risk Percutaneous Coronary Intervention",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2515704?af=R&rss=currentIssue",
-        "published": "29.03.2026, 01:32"
-      },
-      {
-        "title": "Daraxonrasib in Previously Treated Advanced RAS-Mutated Pancreatic Cancer",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2505783?af=R&rss=currentIssue",
-        "published": "06.05.2026, 09:00"
-      },
-      {
-        "title": "Cerebral Amyloid Angiopathy",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMra2411298?af=R&rss=currentIssue",
-        "published": "06.05.2026, 09:00"
-      },
-      {
-        "title": "Antithrombotic Therapy after Ablation for Atrial Fibrillation",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMc2602513?af=R&rss=currentIssue",
-        "published": "06.05.2026, 09:00"
-      },
-      {
-        "title": "Trial of the Oral PCSK9 Inhibitor Enlicitide",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMc2602975?af=R&rss=currentIssue",
-        "published": "06.05.2026, 09:00"
-      },
-      {
-        "title": "Reducing Bacterial Contamination of Blood Bags with a Double Knot",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMc2600589?af=R&rss=currentIssue",
-        "published": "06.05.2026, 09:00"
-      },
-      {
-        "title": "An Evidence-Based Approach to Covid-19 Vaccination",
-        "url": "https://www.nejm.org/doi/full/10.1056/NEJMc2507760?af=R&rss=currentIssue",
-        "published": "09.07.2025, 09:00"
-      }
-    ]
-  },
-  {
-    "category": "Klinische Forschung",
-    "source": "The Lancet",
-    "items": [
-      {
-        "title": "[Department of Error] Department of Error",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00964-5/fulltext?rss=yes",
-        "published": "12.05.2026, 08:50"
-      },
-      {
-        "title": "[Comment] Challenges in mitigating weight regain with incretin-based therapy",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00871-8/fulltext?rss=yes",
-        "published": "12.05.2026, 22:01"
-      },
-      {
-        "title": "[Health Policy] Polyendocrine metabolic ovarian syndrome, the new name for polycystic ovary syndrome: a multistep global consensus process",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00717-8/fulltext?rss=yes",
-        "published": "12.05.2026, 09:00"
-      },
-      {
-        "title": "[Articles] Tirzepatide for maintenance of bodyweight reduction in people with obesity in the USA (SURMOUNT-MAINTAIN): a multicentre, double-blind, randomised, placebo-controlled trial",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00656-2/fulltext?rss=yes",
-        "published": "12.05.2026, 22:01"
-      },
-      {
-        "title": "[Clinical Rounds] A case of acute necrotising encephalitis secondary to human herpesvirus 6 infection",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00252-7/fulltext?rss=yes",
-        "published": "12.05.2026, 22:30"
-      },
-      {
-        "title": "[Comment] Meningococcal B resurgence in the UK: implications for updating global vaccine strategies",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00863-9/fulltext?rss=yes",
-        "published": "08.05.2026, 22:30"
-      },
-      {
-        "title": "[Comment] TAPIS: a positive trial in a defined phenotype",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00820-2/fulltext?rss=yes",
-        "published": "08.05.2026, 09:52"
-      },
-      {
-        "title": "[Correspondence] Damage to Pasteur Institute of Iran threatens regional health security",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00804-4/fulltext?rss=yes",
-        "published": "08.05.2026, 22:30"
-      },
-      {
-        "title": "[Correspondence] Arabian Gulf air pollution from energy infrastructure attacks",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00803-2/fulltext?rss=yes",
-        "published": "08.05.2026, 22:30"
-      },
-      {
-        "title": "[Articles] Ticagrelor with aspirin dual antiplatelet therapy combined with intravenous thrombolysis in patients with ischaemic stroke in China (TAPIS): a multicentre, double-blind, randomised controlled trial",
-        "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)00757-9/fulltext?rss=yes",
-        "published": "08.05.2026, 09:52"
+        "title": "BD appoints Vitor Roque as permanent CFO",
+        "url": "https://www.medtechdive.com/news/bd-appoints-vitor-roque-as-permanent-cfo/819799/",
+        "published": "11.05.2026, 14:00"
       }
     ]
   }
