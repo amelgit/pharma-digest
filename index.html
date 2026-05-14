@@ -611,12 +611,13 @@ function enhanceCard(card) {
   }
 
   // Wrap Ausblick content in a styled box
+  // Stop at <hr>, <details>, or next <h2> — avoids swallowing footnotes and the sources accordion
   card.querySelectorAll('h2.s-outlook').forEach(h2 => {
     const box = document.createElement('div');
     box.className = 'outlook-box';
     const nodes = [];
     let node = h2.nextElementSibling;
-    while (node && node.tagName !== 'H2') {
+    while (node && node.tagName !== 'H2' && node.tagName !== 'HR' && node.tagName !== 'DETAILS') {
       nodes.push(node);
       node = node.nextElementSibling;
     }
