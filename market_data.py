@@ -4,13 +4,14 @@ from datetime import datetime, timedelta, timezone
 logger = logging.getLogger(__name__)
 
 INSTRUMENTS = [
-    {"ticker": "SHL.DE",  "name": "Siemens Healthineers",  "decimals": 2, "prefix": "€"},
-    {"ticker": "FME.DE",  "name": "Fresenius Medical Care", "decimals": 2, "prefix": "€"},
-    {"ticker": "MDT",     "name": "Medtronic",              "decimals": 2, "prefix": "$"},
-    {"ticker": "BDX",     "name": "Becton Dickinson",       "decimals": 2, "prefix": "$"},
-    {"ticker": "GEHC",    "name": "GE HealthCare",          "decimals": 2, "prefix": "$"},
-    {"ticker": "SYK",     "name": "Stryker",                "decimals": 2, "prefix": "$"},
-    {"ticker": "IHI",     "name": "iShares MedTech ETF",    "decimals": 2, "prefix": "$"},
+    # Direkte Wettbewerber / urologischer Markt
+    {"ticker": "COLO-B.CO", "name": "Coloplast",              "decimals": 2, "prefix": "DKK"},
+    {"ticker": "BSX",        "name": "Boston Scientific",      "decimals": 2, "prefix": "$"},
+    {"ticker": "TFX",        "name": "Teleflex",               "decimals": 2, "prefix": "$"},
+    {"ticker": "BDX",        "name": "BD / C.R. Bard",         "decimals": 2, "prefix": "$"},
+    # Deutscher Markt / Benchmarks
+    {"ticker": "SHL.DE",     "name": "Siemens Healthineers",   "decimals": 2, "prefix": "€"},
+    {"ticker": "IHI",        "name": "iShares MedTech ETF",    "decimals": 2, "prefix": "$"},
 ]
 
 

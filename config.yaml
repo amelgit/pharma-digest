@@ -48,3 +48,18 @@ sources:
       - name: MDDI Online
         url: https://www.mddionline.com/rss.xml
         type: rss
+
+  urology_market:
+    name: "Urologie & Wettbewerb"
+    sites:
+      - name: Urology Times
+        url: https://www.urologytimes.com/rss.xml
+        type: rss
+
+      - name: EAU – Uroweb News
+        url: https://uroweb.org/feed
+        type: rss
+
+      - name: Journal of Urology (AUA)
+        url: https://www.auajournals.org/action/showFeed?type=etoc&feed=rss&jc=juro
+        type: rss
