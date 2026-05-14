@@ -125,8 +125,8 @@ def main() -> None:
     if sys.platform == "darwin":
         subprocess.run([
             "osascript", "-e",
-            f'display notification "Pharma-Briefing vom {date.today().strftime("%d.%m.%Y")} wurde gespeichert." '
-            f'with title "Pharma Digest" subtitle "{total} Schlagzeilen verarbeitet" sound name "Glass"'
+            f'display notification "MedTech-Briefing vom {date.today().strftime("%d.%m.%Y")} wurde gespeichert." '
+            f'with title "MedTech Digest" subtitle "{total} Schlagzeilen verarbeitet" sound name "Glass"'
         ], check=False)
 
     git_publish(filepath, market_path if market else None, sources_path)
@@ -162,7 +162,7 @@ def git_publish(md_path: Path, market_path: Path, sources_path: Path = None) -> 
         logger.info("Keine Änderungen zum Committen.")
         return
 
-    msg = f"Pharma-Briefing {today}"
+    msg = f"MedTech-Briefing {today}"
     commit = git("commit", "-m", msg)
     if commit.returncode != 0:
         logger.warning(f"git commit fehlgeschlagen: {commit.stderr.strip()}")

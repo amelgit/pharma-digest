@@ -171,7 +171,7 @@ def render_market_widget(instruments: list, fetched_at: str = "") -> str:
     return (
         '<div class="mkt-widget">'
         '<div class="mkt-header">'
-        '<div class="mkt-title">💊 Pharma-Märkte</div>'
+        '<div class="mkt-title">📊 MedTech-Märkte</div>'
         f'<div class="mkt-date-label">{date_label}</div>'
         '</div>'
         '<table class="mkt-table"><thead><tr>'
@@ -202,7 +202,7 @@ def render_market_analysis(analysis: str) -> str:
     body = "".join(f"<p>{p}</p>" for p in paras)
     return (
         '<div class="mkt-analysis">'
-        '<div class="mkt-analysis-title">🔍 Kursbewegungen &amp; Pharma-Nachrichten</div>'
+        '<div class="mkt-analysis-title">🔍 Kursbewegungen &amp; MedTech-News</div>'
         + body +
         '</div>'
         '</div>\n\n'
@@ -321,7 +321,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pharma Digest</title>
+<title>MedTech Digest</title>
 <style>
   :root {
     /* sidebar — always dark */
@@ -805,6 +805,68 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     flex-shrink: 0;
   }
 
+  /* ── Section color accents (by category keyword) ── */
+  .briefing-card h2.s-mdr      { border-bottom-color: #0ea5e9; }
+  .briefing-card h2.s-vigil    { border-bottom-color: #ef4444; }
+  .briefing-card h2.s-industry { border-bottom-color: #22c55e; }
+  .briefing-card h2.s-clinical { border-bottom-color: #a855f7; }
+  .briefing-card h2.s-outlook  { border-bottom-color: #f59e0b; }
+  body.light-mode .briefing-card h2.s-mdr      { border-bottom-color: #0284c7; }
+  body.light-mode .briefing-card h2.s-vigil    { border-bottom-color: #dc2626; }
+  body.light-mode .briefing-card h2.s-industry { border-bottom-color: #16a34a; }
+  body.light-mode .briefing-card h2.s-clinical { border-bottom-color: #9333ea; }
+  body.light-mode .briefing-card h2.s-outlook  { border-bottom-color: #d97706; }
+
+  /* ── Intro callout ── */
+  .briefing-card p.intro-p {
+    border-left: 3px solid var(--sidebar-accent);
+    padding: 12px 16px !important;
+    background: rgba(14,165,233,.07);
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 28px !important;
+    line-height: 1.7;
+  }
+  body.light-mode .briefing-card p.intro-p { background: rgba(2,132,199,.06); }
+
+  /* ── Outlook box ── */
+  .outlook-box {
+    margin-top: 10px;
+    padding: 14px 18px;
+    background: rgba(245,158,11,.07);
+    border: 1px solid rgba(245,158,11,.22);
+    border-radius: 8px;
+  }
+  body.light-mode .outlook-box {
+    background: rgba(245,158,11,.05);
+    border-color: rgba(217,119,6,.22);
+  }
+  .outlook-box p { margin-bottom: 0 !important; }
+  .outlook-box ul { margin-bottom: 0 !important; }
+
+  /* ── Reading meta bar ── */
+  .briefing-reading-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 28px;
+    flex-wrap: wrap;
+  }
+  .meta-pill {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    color: var(--sidebar-accent);
+    padding: 3px 9px;
+    border-radius: 10px;
+  }
+  .meta-readtime {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
   /* ── Responsive ── */
   @media (max-width: 700px) {
     body { flex-direction: column; overflow: auto; height: auto; }
@@ -827,7 +889,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <nav id="sidebar">
   <div id="sidebar-header">
     <div class="sidebar-title-row">
-      <h1>Pharma Digest</h1>
+      <h1>MedTech Digest</h1>
       <button id="theme-btn" onclick="toggleTheme()" title="Dark/Light Mode umschalten">🌙</button>
     </div>
     <p id="count-label"></p>
@@ -848,6 +910,52 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </main>
 
 <script>
+function enhanceCard(card) {
+  // Color-code h2 section headers by keyword
+  card.querySelectorAll('h2').forEach(h2 => {
+    const t = h2.textContent.toLowerCase();
+    if (/ausblick|fazit/.test(t))                                  h2.classList.add('s-outlook');
+    else if (/mdr|ivdr|regulat|zulassung|bfarm|ema|fda/.test(t))   h2.classList.add('s-mdr');
+    else if (/vigilanz|sicherheit|recall|rückruf|fsca/.test(t))    h2.classList.add('s-vigil');
+    else if (/industrie|markt|medtech|unternehmen/.test(t))        h2.classList.add('s-industry');
+    else if (/klinisch|studie|evidenz|bewertung|cer/.test(t))      h2.classList.add('s-clinical');
+  });
+
+  // Style first paragraph as intro callout
+  const h1 = card.querySelector('h1');
+  if (h1) {
+    const intro = h1.nextElementSibling;
+    if (intro && intro.tagName === 'P') intro.classList.add('intro-p');
+  }
+
+  // Wrap Ausblick content in a styled box
+  card.querySelectorAll('h2.s-outlook').forEach(h2 => {
+    const box = document.createElement('div');
+    box.className = 'outlook-box';
+    const nodes = [];
+    let node = h2.nextElementSibling;
+    while (node && node.tagName !== 'H2') {
+      nodes.push(node);
+      node = node.nextElementSibling;
+    }
+    if (nodes.length) {
+      h2.after(box);
+      nodes.forEach(n => box.appendChild(n));
+    }
+  });
+
+  // Add reading meta bar (after intro-p detection, before it)
+  if (h1) {
+    const words = (card.textContent || '').trim().split(/\s+/).length;
+    const mins = Math.max(1, Math.round(words / 220));
+    const meta = document.createElement('div');
+    meta.className = 'briefing-reading-meta';
+    meta.innerHTML = '<span class="meta-pill">MDR-Fokus</span>'
+      + `<span class="meta-readtime">~${mins} Min. Lesezeit</span>`;
+    h1.after(meta);
+  }
+}
+
 function applyTheme(mode) {
   if (mode === "light") {
     document.body.classList.add("light-mode");
@@ -894,6 +1002,7 @@ briefings.forEach((b, i) => {
   panel.id = "briefing-" + b.id;
   panel.innerHTML = `<div class="briefing-card">${b.html}</div>`;
   content.appendChild(panel);
+  enhanceCard(panel.querySelector('.briefing-card'));
 });
 
 function show(id) {

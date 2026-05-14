@@ -4,13 +4,13 @@ from datetime import datetime, timedelta, timezone
 logger = logging.getLogger(__name__)
 
 INSTRUMENTS = [
-    {"ticker": "BAYN.DE", "name": "Bayer AG",        "decimals": 2, "prefix": "€"},
-    {"ticker": "MRK.DE",  "name": "Merck KGaA",      "decimals": 2, "prefix": "€"},
-    {"ticker": "FRE.DE",  "name": "Fresenius SE",     "decimals": 2, "prefix": "€"},
-    {"ticker": "NVS",     "name": "Novartis",         "decimals": 2, "prefix": "$"},
-    {"ticker": "PFE",     "name": "Pfizer",           "decimals": 2, "prefix": "$"},
-    {"ticker": "AZN",     "name": "AstraZeneca",      "decimals": 2, "prefix": "$"},
-    {"ticker": "IBB",     "name": "iShares Biotech",  "decimals": 2, "prefix": "$"},
+    {"ticker": "SHL.DE",  "name": "Siemens Healthineers",  "decimals": 2, "prefix": "€"},
+    {"ticker": "FME.DE",  "name": "Fresenius Medical Care", "decimals": 2, "prefix": "€"},
+    {"ticker": "MDT",     "name": "Medtronic",              "decimals": 2, "prefix": "$"},
+    {"ticker": "BDX",     "name": "Becton Dickinson",       "decimals": 2, "prefix": "$"},
+    {"ticker": "GEHC",    "name": "GE HealthCare",          "decimals": 2, "prefix": "$"},
+    {"ticker": "SYK",     "name": "Stryker",                "decimals": 2, "prefix": "$"},
+    {"ticker": "IHI",     "name": "iShares MedTech ETF",    "decimals": 2, "prefix": "$"},
 ]
 
 

@@ -4,44 +4,47 @@ max_headlines_per_source: 10
 output_dir: summaries
 
 sources:
-  pharma_industry:
-    name: "Pharma-Industrie"
+  mdr_regulatory:
+    name: "MDR & Regulatorik"
     sites:
-      - name: Fierce Pharma
-        url: https://www.fiercepharma.com/rss/xml
+      - name: BfArM – Medizinprodukte
+        url: https://www.bfarm.de/SharedDocs/RSS/DE/Medizinprodukte.xml
         type: rss
 
-      - name: Pharmazeutische Zeitung
-        url: https://www.pharmazeutische-zeitung.de/rss/news.rss
+      - name: FDA – Medical Devices
+        url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/medical-devices/rss.xml
         type: rss
 
-      - name: Apotheke Adhoc
-        url: https://www.apotheke-adhoc.de/rss/rss.xml
-        type: rss
-
-  clinical_research:
-    name: "Klinische Forschung"
-    sites:
-      - name: NEJM
-        url: https://www.nejm.org/action/showFeed?jc=nejm&type=etoc&feed=rss
-        type: rss
-
-      - name: The Lancet
-        url: https://www.thelancet.com/rssfeed/lancet_online.xml
-        type: rss
-
-      - name: ClinicalTrials.gov
-        url: https://clinicaltrials.gov/news-and-events
-        type: html
-        selector: "h2 a, h3 a, .article-title a, .news-title a"
-
-  regulatory:
-    name: "Regulatorisches"
-    sites:
-      - name: EMA Pressemitteilungen
+      - name: EMA – Pressemitteilungen
         url: https://www.ema.europa.eu/en/news/press-releases/rss
         type: rss
 
-      - name: FDA News
-        url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/press-releases/rss.xml
+      - name: RAPS – Regulatory Focus
+        url: https://www.raps.org/rss/news
+        type: rss
+
+  vigilance_safety:
+    name: "Vigilanz & Sicherheit"
+    sites:
+      - name: BfArM – Sicherheitsinformationen
+        url: https://www.bfarm.de/SiteGlobals/Forms/RSS/DE/rss_Sicherheitsinformationen.xml
+        type: rss
+
+      - name: FDA – Recalls
+        url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/recalls/rss.xml
+        type: rss
+
+  industry_medtech:
+    name: "MedTech-Industrie"
+    sites:
+      - name: Medical Device Network
+        url: https://www.medicaldevice-network.com/feed/
+        type: rss
+
+      - name: MedTech Dive
+        url: https://www.medtechdive.com/feeds/news/
+        type: rss
+
+      - name: MDDI Online
+        url: https://www.mddionline.com/rss.xml
         type: rss
