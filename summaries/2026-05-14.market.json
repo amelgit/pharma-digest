@@ -73,13 +73,13 @@
       "name": "Siemens Healthineers",
       "decimals": 2,
       "prefix": "€",
-      "last_close": 34.45,
+      "last_close": 34.37,
       "last_date": "14.05.2026",
-      "day_abs": 0.52,
-      "day_pct": 1.53,
-      "week_pct": 1.53,
-      "month_pct": -10.03,
-      "ytd_pct": -20.08,
+      "day_abs": 0.44,
+      "day_pct": 1.3,
+      "week_pct": 1.3,
+      "month_pct": -10.24,
+      "ytd_pct": -20.26,
       "week52_high": 48.37,
       "week52_low": 33.57,
       "market_state": "open",
@@ -103,6 +103,6 @@
       "url": "https://finance.yahoo.com/quote/IHI"
     }
   ],
-  "analysis": "Die überwiegend negativen Kursbewegungen bei Coloplast (-1,92 %), Boston Scientific (-1,92 %) und BD/C.R. Bard (-2,26 %) sind im Kontext des gestrigen Briefings plausibel, da die FDA-Governance-Krise – insbesondere das Blockieren von Impfstoff-Sicherheitsstudien und die Kritik an Alnylams Werbekommunikation – ein allgemeines regulatorisches Misstrauensklima schafft, das MedTech-Werte mit starker US-Zulassungsabhängigkeit belastet. Die deutliche Underperformance von BD/C.R. Bard ist dabei besonders auffällig, da das Unternehmen als diversifizierter Gerätehersteller besonders sensitiv auf FDA-Signale zur Compliance und Marktüberwachung reagiert. Kontraintuitiv erscheint hingegen der Kursanstieg von Siemens Healthineers (+1,53 %), der sich möglicherweise durch die positiven ATLAS-Metaanalysedaten zur Thrombektomie erklären lässt, da Siemens Healthineers als führender Anbieter bildgebender und interventioneller Systeme direkt von einer Ausweitung des therapeutischen Fensters bei Schlaganfallbehandlungen profitieren könnte. Teleflex (+0,78 %) folgt dieser Logik teilweise, da das Unternehmen ebenfalls Produkte im vaskulären Interventionsbereich anbietet und von der wachsenden klinischen Evidenz für endovaskuläre Eingriffe begünstigt wird. Die moderate Schwäche des iShares MedTech ETF (-0,39 %) spiegelt das gemischte Bild korrekt wider und deutet darauf hin, dass sektorspezifische Nachrichten einzelne Titel stärker differenzieren als den Gesamtsektor.",
-  "fetched_at": "14.05.2026, 10:04"
+  "analysis": "## Analyse der heutigen MedTech-Kursbewegungen\n\nDie breite Schwäche bei Coloplast (-1,92 %), Boston Scientific (-1,92 %) und BD/C.R. Bard (-2,26 %) ist vor dem gestrigen Briefing-Hintergrund plausibel erklärbar: Die FDA-Governance-Krise rund um zurückgehaltene Impfstoff-Sicherheitsstudien schürt generelles Misstrauen gegenüber US-regulatorischen Prozessen, was Medizinproduktehersteller mit hoher FDA-Abhängigkeit überproportional belastet. Der stärkste Rückgang bei BD/C.R. Bard ist dabei nicht überraschend, da das Unternehmen als breit aufgestellter Devices-Konzern besonders sensitiv auf regulatorische Unsicherheitssignale reagiert. Kontraintuitiv hingegen ist der Anstieg von Siemens Healthineers (+1,30 %), der sich möglicherweise durch die ATLAS-Metaanalyse-Daten zur erweiterten Thrombektomie erklären lässt – ein breiteres therapeutisches Fenster bis 24 Stunden steigert die Nachfrage nach bildgebender Diagnostik, einem Kerngeschäft von Healthineers. Teleflex (+0,78 %) profitiert möglicherweise ebenfalls indirekt von den positiven Schlaganfalldaten (TAPIS, ATLAS), da das Unternehmen vaskuläre Interventionsprodukte im Portfolio hält und ein erweitertes Behandlungsfenster das Marktpotenzial vergrößert. Der moderate Rückgang des iShares MedTech ETF (-0,39 %) spiegelt die gemischte Gesamtlage korrekt wider und dämpft die sektorweite Schwäche durch die positiven Einzelwerte Siemens Healthineers und Teleflex ab.",
+  "fetched_at": "14.05.2026, 14:14"
 }
