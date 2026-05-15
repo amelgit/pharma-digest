@@ -73,16 +73,16 @@
       "name": "Siemens Healthineers",
       "decimals": 2,
       "prefix": "€",
-      "last_close": 34.11,
-      "last_date": "14.05.2026",
-      "day_abs": 0.18,
-      "day_pct": 0.53,
-      "week_pct": 0.53,
-      "month_pct": -10.92,
-      "ytd_pct": -20.87,
+      "last_close": 33.55,
+      "last_date": "15.05.2026",
+      "day_abs": -0.56,
+      "day_pct": -1.64,
+      "week_pct": -0.27,
+      "month_pct": -12.49,
+      "ytd_pct": -22.16,
       "week52_high": 48.37,
-      "week52_low": 33.57,
-      "market_state": "pre",
+      "week52_low": 33.55,
+      "market_state": "open",
       "url": "https://finance.yahoo.com/quote/SHL.DE"
     },
     {
@@ -103,6 +103,6 @@
       "url": "https://finance.yahoo.com/quote/IHI"
     }
   ],
-  "analysis": "## Analyse: Heutige Kursbewegungen im Regulatorik-Kontext\n\nDie breite positive Tendenz bei Boston Scientific (+0,92 %), BD/C.R. Bard (+0,20 %), Teleflex (+0,18 %) und Siemens Healthineers (+0,53 %) – gespiegelt im iShares MedTech ETF mit +0,52 % – ist plausibel vor dem Hintergrund einer insgesamt konstruktiven Nachrichtenlage: Zwei FDA-Clearances für KI-Diagnostika sowie der De-Novo-Antrag von HistoSonics für fokussierte Ultraschall-Ablation signalisieren eine trotz FDA-Führungsvakuum funktionsfähige Zulassungspipeline, was Sektorvertrauen stützt. Coloplasts Rückgang von –1,92 % ist dabei auffällig und kontraintuitiv, da keine FSCA-Meldung gegen Coloplast direkt vorlag; denkbar ist, dass der Kit-Rückruf mit Spritzenkomponenten latente Qualitätsbedenken im Katheter- und Set-Segment – einem Kernmarkt von Coloplast – verstärkt hat und Investoren präventiv Risiko abgebaut haben. Die Stryker/Amplitude-Akquisition für bis zu 835 Mio. USD dürfte die positive Grundstimmung im interventionellen Kathetermarkt zusätzlich befeuert haben, wovon BD/C.R. Bard und Teleflex als Wettbewerber im Drainagesegment indirekt profitieren. Insgesamt erscheinen die Bewegungen im Sektorkontext kohärent – mit Coloplast als einzigem Ausreißer, dessen Kursverlust eine überproportionale Reaktion auf diffuse Komponentenrisikonachrichten darstellt, die keine unmittelbar unternehmensspezifische Ursache hatten.",
-  "fetched_at": "15.05.2026, 09:00"
+  "analysis": "## Marktanalyse: Kursbewegungen im Regulatorik-Kontext\n\nDer leichte Rückgang bei **Coloplast (-1,92 %)** und **Siemens Healthineers (-1,64 %)** ist vor dem gestrigen Nachrichtenhintergrund bedingt plausibel: Obwohl keine direkten FSCA-Meldungen gegen Coloplast vorlagen, dürfte der Kit-Rückruf rund um fehlerhafte Medline-Spritzen-Komponenten generellen Druck auf Hersteller mit Kit-basierten urologischen Produkten ausgeübt haben, zu denen Coloplast strukturell zählt. Das FDA-Führungsvakuum nach dem Rücktritt von Commissioner Makary belastet tendenziell Unternehmen mit starker US-Pipeline, was den Rückgang bei Siemens Healthineers mit SaMD- und Diagnostika-Exponierung zumindest teilweise erklären könnte. **Boston Scientific (+0,92 %)** und der **iShares MedTech ETF (+0,52 %)** profitierten hingegen möglicherweise von den zwei positiven FDA-Clearances für KI-Diagnostika (Artera, Bayesian Health), die allgemeine Risikobereitschaft im MedTech-Segment stützten. Etwas überraschend ist, dass **BD/C.R. Bard (+0,20 %)** trotz des neuen CFO-Wechsels (Vitor Roque) – der typischerweise kurzfristige Unsicherheit erzeugt – leicht zulegte, was darauf hindeutet, dass der Markt die Personalie als strategisch neutral oder positiv bewertet hat. Insgesamt spiegeln die Bewegungen eine selektive Risikowahrnehmung wider, bei der regulatorische Unsicherheiten (Rückrufe, FDA-Vakuum) einzelne Werte belasteten, während konkrete Zulassungserfolge den Sektor im Durchschnitt leicht stützten.",
+  "fetched_at": "15.05.2026, 14:26"
 }
