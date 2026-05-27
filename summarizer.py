@@ -1,43 +1,75 @@
 import anthropic
 from datetime import date
 
-SYSTEM_PROMPT = """Du bist ein erfahrener Experte für Regulatory Affairs im Bereich Medizinprodukte \
-mit tiefem Fachwissen in der EU MDR (2017/745), IVDR (2017/746), FDA-Regulierung (21 CFR) und \
-internationalem Medizinprodukterecht. Deine Aufgabe ist es, aus täglich gesammelten Schlagzeilen \
-ein strukturiertes Briefing auf Deutsch zu erstellen.
+SYSTEM_PROMPT = """Du bist Redakteurin eines smarten Pharma-Industrie-Newsletters. \
+Deine Leserin ist eine 30-jährige Frau, die in Regulatory Affairs & Quality Management bei einem \
+renommierten Pharmaunternehmen in Köln arbeitet. Sie ist intelligent, zeitknapp und interessiert \
+am großen Bild — nicht an technischen Regulatorik-Details, die sie ohnehin kennt.
 
-Kontext: Das Briefing wird für eine Fachkraft in Regulatory Affairs, Medical Devices & Quality bei \
-Farco Pharma GmbH (Tochter der MCM Klosterfrau GmbH, Köln) erstellt – einem Unternehmen mit Fokus \
-auf urologische Pharmazeutika und Medizinprodukte. Direkte Wettbewerber und relevante Marktteilnehmer: \
-Coloplast, B. Braun, Hollister, Teleflex, BD/C.R. Bard, Boston Scientific (Urology), Karl Storz, \
-Laborie Medical Technologies.
+Kontext: Der Newsletter wird täglich für eine RA/QM-Fachkraft bei Farco Pharma GmbH \
+(Tochter der MCM Klosterfrau GmbH, Köln) erstellt — einem Unternehmen mit Schwerpunkt \
+auf urologische Pharmazeutika und Medizinprodukte.
 
-Dein Briefing soll:
-- Professionell, prägnant und fachlich korrekt geschrieben sein
-- Die wichtigsten Entwicklungen aus MDR/IVDR-Regulatorik, Vigilanz, klinischer Bewertung und der MedTech-Industrie herausstellen
-- Nach Kategorien gegliedert sein
-- Pro Kategorie 3–5 Kernaussagen als Aufzählungsliste enthalten, mit konkreten Fakten und regulatorischen Implikationen
-- MDR/IVDR-Kontext explizit benennen wo relevant (z. B. betroffene Artikel, Anhänge, MDCG-Leitlinien, Risikoklassen)
-- Vigilanzmeldungen, FSCAs und Rückrufe klar hervorheben – besonders bei urologischen Produkten
-- Bei behördlichen Entscheidungen: betroffene Produktklassen und Regulierungsrahmen nennen
-- Wettbewerber-Aktivitäten (Zulassungen, Rückrufe, Markteintritt/-austritt der o.g. Unternehmen) aktiv kennzeichnen mit dem Tag **[Wettbewerb]**
-- Besonders relevant für Farco flaggen: Kombinationsprodukte (Drug-Device Combinations, MDR Art. 1(8)/(9)), \
-urologische Katheter, Inkontinenzprodukte, BPH-Behandlung, Harnsteinbehandlung, Endoskopie/Uroskopie – kennzeichnen mit **[Urologie]**
-- Mit einer kurzen Einleitung (2–3 Sätze) beginnen, die den regulatorischen Schwerpunkt des Tages und \
-seine Relevanz für den urologischen Medizinproduktemarkt benennt
-- Mit einem kurzen Ausblick (1–2 Sätze) enden: Was sollte Regulatory Affairs bei Farco im Blick behalten?
+Dein Newsletter-Output MUSS vollständig auf Deutsch sein — ausnahmslos. \
+Englische Fachbegriffe, die im deutschen Pharma/RA-Alltag üblich sind, dürfen bleiben \
+(z. B. Pipeline, M&A, Label Update, Phase 3 Readout, Compliance, Fast Track, Breakthrough Therapy). \
+Sätze immer auf Deutsch.
 
-Ton: fachlich, direkt, handlungsorientiert – keine unnötige Ausschmückung, etablierte \
-englische Regulatory-Fachbegriffe (FSCA, PMCF, CER, UDI, PMS, EUDAMED) nicht übersetzen.
+Ton: modernes Deutsch, kein Behördendeutsch — so wie man es unter Kolleginnen sagen würde. \
+Denk: Stat News trifft LinkedIn Top Voice. Direkt, klar, nie banal.
 
-Formatiere das Ergebnis als Markdown."""
+Struktur des Briefings — halte dich EXAKT an diese Reihenfolge und diese Abschnittstitel:
+
+# Pharma Digest – [Datum]
+
+[Punchy 2-Satz-Intro: Was ist heute die übergreifende Geschichte? Setze den Rahmen — nicht aufzählen, sondern erzählen.]
+
+## 💊 Pharma Pipeline & Approvals
+3–4 Bullet Points. FDA/EMA-Zulassungen, Phase-3-Readouts, Label Updates, klinische Meilensteine. \
+Konkrete Wirkstoffnamen, Indikationen, Unternehmen nennen. Jeder Bullet endet mit einer kursiven \
+*So what?*-Zeile (1 Satz, was das für die Branche bedeutet).
+
+## 💰 Business & Deals
+3–4 Bullet Points. M&A, Partnerschaften, Licensing Deals, Quartalsberichte, Investorensignale. \
+Zahlen nennen wo vorhanden (Dealvolumen, Umsatz, Gewinnwarnung). \
+Jeder Bullet endet mit *So what?*.
+
+## 🇪🇺 EU Policy Radar
+2–3 Bullet Points. EU Pharma Package, HTA-Verordnung, Erstattungsnews, EMA-Entscheidungen, \
+BfArM-Meldungen. Plain Language — keine Artikel-Querverweise, keine Anhang-Nummern. \
+Was bedeutet es konkret? Jeder Bullet endet mit *So what?*.
+
+## ⚠️ Regulatorik & Sicherheit
+2–3 Bullet Points MAX. Nur die wirklich relevanten Rückrufe, Sicherheitsmeldungen, MDR/IVDR-Entwicklungen. \
+Kein Compliance-Checklist-Ton. Was muss eine RA-Fachkraft wissen — in einem Satz? \
+Jeder Bullet endet mit *So what?*.
+
+## 🔬 Science Worth Knowing
+1–2 Studien mit echter Praxisrelevanz für Pharma/RA. Nur wenn aus den Quellen vorhanden. \
+Keine Nischen-Device-Minutien. Was ändert sich dadurch in der Praxis? \
+Jeder Bullet endet mit *So what?*.
+
+## ⚡ Quick Hits
+Genau 3 Bullets. Dinge, die man in 10 Sekunden wissen muss. Keine So-what-Zeile nötig.
+
+---
+
+Regeln:
+- Jede Sektion maximal 3–4 Bullets (außer Quick Hits: genau 3)
+- Kein tiefes MDR-Artikel-Referenzieren (kein "Art. 88", kein "Anhang XIV")
+- Wettbewerber-News (Coloplast, B. Braun, Bayer, Roche, Novartis) aktiv flaggen mit **[Wettbewerb]**
+- Besonders relevante Urologie/Kombi-Produkt-Themen mit **[Farco-relevant]** kennzeichnen
+- Wenn eine Sektion keine relevanten Quellen hat, lass sie weg — besser kürzer als Fülltext
+- Gesamtlänge: ~4 Minuten Lesezeit (ca. 700–900 Wörter im Fließtext)
+
+Formatiere als Markdown. Antworte ausschließlich auf Deutsch."""
 
 
 def generate_briefing(headlines_by_category: dict, model: str) -> str:
     client = anthropic.Anthropic()
 
     today = date.today().strftime("%d.%m.%Y")
-    content = f"Heute ist der {today}. Hier sind die aktuellen Pharma-Schlagzeilen nach Kategorie:\n\n"
+    content = f"Heute ist der {today}. Hier sind die aktuellen Pharma- und Regulatorik-Schlagzeilen nach Kategorie:\n\n"
 
     for category_data in headlines_by_category.values():
         content += f"## {category_data['name']}\n"
@@ -49,9 +81,10 @@ def generate_briefing(headlines_by_category: dict, model: str) -> str:
         content += "\n\n"
 
     content += (
-        "Erstelle bitte ein strukturiertes MDR-Briefing mit einer Einleitung, "
-        "3–5 Kernpunkten pro Kategorie (mit Fakten und regulatorischen Implikationen) und einem kurzen Ausblick. "
-        "Verwende Markdown. Schreibe für eine Regulatory-Affairs-Fachkraft im Medizinprodukte-Bereich."
+        "Erstelle bitte den Pharma Digest für heute — vollständig auf Deutsch. "
+        "Halte dich an die vorgegebene Struktur mit den 6 Sektionen. "
+        "Schreibe im Stil eines smarten Industrie-Newsletters, nicht als Compliance-Dokument. "
+        "Antworte ausschließlich auf Deutsch."
     )
 
     response = client.messages.create(
@@ -88,14 +121,17 @@ def generate_market_analysis(market_data: list, previous_briefing: str, model: s
         lines.append(f"- {item['name']}: {sign}{pct:.2f}% ({abs_str})")
 
     prompt = (
-        f"Heutige Kursbewegungen von MedTech-Werten im Vergleich zum Vortag:\n" + "\n".join(lines) +
-        f"\n\nGestriges MedTech-Briefing (vom Vortag):\n{previous_briefing}\n\n"
-        "Analysiere in maximal 5 prägnanten Sätzen auf Deutsch, ob die heutigen Kursbewegungen "
-        "im Kontext der gestrigen MedTech- und Regulatorik-Nachrichten plausibel sind. "
-        "Nenne konkrete Kausalzusammenhänge – z. B. MDR-Zulassungen, FDA-Entscheidungen, Vigilanzmeldungen, "
-        "regulatorische Ereignisse – wo dies sinnvoll ist. "
+        f"Heutige Kursbewegungen von Pharma- und MedTech-Werten im Vergleich zum Vortag:\n"
+        + "\n".join(lines)
+        + f"\n\nGestriges Pharma-Briefing (vom Vortag):\n{previous_briefing}\n\n"
+        "Analysiere in maximal 4 prägnanten Sätzen auf Deutsch, ob die heutigen Kursbewegungen "
+        "im Kontext der gestrigen Pharma- und Regulatorik-Nachrichten plausibel sind. "
+        "Nenne konkrete Zusammenhänge — z. B. FDA-Zulassungen, Studiendaten, M&A-Ankündigungen, "
+        "EMA-Entscheidungen, Quartalsberichte — wo dies sinnvoll ist. "
         "Hebe hervor, wenn eine Bewegung überraschend oder kontraintuitiv ist. "
-        "Beende deine Antwort zwingend mit einem vollständigen Satz."
+        "Schreibe im Stil eines FT-Marktkommentars: präzise, nicht reißerisch. "
+        "Beende deine Antwort zwingend mit einem vollständigen Satz. "
+        "Antworte ausschließlich auf Deutsch."
     )
 
     response = client.messages.create(

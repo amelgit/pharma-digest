@@ -171,7 +171,7 @@ def render_market_widget(instruments: list, fetched_at: str = "") -> str:
     return (
         '<div class="mkt-widget">'
         '<div class="mkt-header">'
-        '<div class="mkt-title">📊 MedTech-Märkte</div>'
+        '<div class="mkt-title">📊 Pharma &amp; MedTech Märkte</div>'
         f'<div class="mkt-date-label">{date_label}</div>'
         '</div>'
         '<table class="mkt-table"><thead><tr>'
@@ -202,7 +202,7 @@ def render_market_analysis(analysis: str) -> str:
     body = "".join(f"<p>{p}</p>" for p in paras)
     return (
         '<div class="mkt-analysis">'
-        '<div class="mkt-analysis-title">🔍 Kursbewegungen &amp; MedTech-News</div>'
+        '<div class="mkt-analysis-title">🔍 Kursbewegungen &amp; Marktkontext</div>'
         + body +
         '</div>'
         '</div>\n\n'
@@ -321,7 +321,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MedTech Digest</title>
+<title>Pharma Digest</title>
 <style>
   :root {
     /* sidebar — always dark */
@@ -806,16 +806,29 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   }
 
   /* ── Section color accents (by category keyword) ── */
+  .briefing-card h2.s-pharma   { border-bottom-color: #0ea5e9; }
+  .briefing-card h2.s-business { border-bottom-color: #22c55e; }
+  .briefing-card h2.s-eu       { border-bottom-color: #818cf8; }
+  .briefing-card h2.s-regul    { border-bottom-color: #f59e0b; }
+  .briefing-card h2.s-science  { border-bottom-color: #2dd4bf; }
+  .briefing-card h2.s-quick    { border-bottom-color: #94a3b8; }
+  .briefing-card h2.s-outlook  { border-bottom-color: #f59e0b; }
+  /* legacy class aliases for existing briefings */
   .briefing-card h2.s-mdr      { border-bottom-color: #0ea5e9; }
   .briefing-card h2.s-vigil    { border-bottom-color: #ef4444; }
   .briefing-card h2.s-industry { border-bottom-color: #22c55e; }
-  .briefing-card h2.s-clinical { border-bottom-color: #a855f7; }
-  .briefing-card h2.s-outlook  { border-bottom-color: #f59e0b; }
+  .briefing-card h2.s-clinical { border-bottom-color: #2dd4bf; }
+  body.light-mode .briefing-card h2.s-pharma   { border-bottom-color: #0284c7; }
+  body.light-mode .briefing-card h2.s-business { border-bottom-color: #16a34a; }
+  body.light-mode .briefing-card h2.s-eu       { border-bottom-color: #6366f1; }
+  body.light-mode .briefing-card h2.s-regul    { border-bottom-color: #d97706; }
+  body.light-mode .briefing-card h2.s-science  { border-bottom-color: #0d9488; }
+  body.light-mode .briefing-card h2.s-quick    { border-bottom-color: #64748b; }
+  body.light-mode .briefing-card h2.s-outlook  { border-bottom-color: #d97706; }
   body.light-mode .briefing-card h2.s-mdr      { border-bottom-color: #0284c7; }
   body.light-mode .briefing-card h2.s-vigil    { border-bottom-color: #dc2626; }
   body.light-mode .briefing-card h2.s-industry { border-bottom-color: #16a34a; }
-  body.light-mode .briefing-card h2.s-clinical { border-bottom-color: #9333ea; }
-  body.light-mode .briefing-card h2.s-outlook  { border-bottom-color: #d97706; }
+  body.light-mode .briefing-card h2.s-clinical { border-bottom-color: #0d9488; }
 
   /* ── Intro callout ── */
   .briefing-card p.intro-p {
@@ -889,7 +902,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <nav id="sidebar">
   <div id="sidebar-header">
     <div class="sidebar-title-row">
-      <h1>MedTech Digest</h1>
+      <h1>Pharma Digest</h1>
       <button id="theme-btn" onclick="toggleTheme()" title="Dark/Light Mode umschalten">🌙</button>
     </div>
     <p id="count-label"></p>
@@ -914,11 +927,17 @@ function enhanceCard(card) {
   // Color-code h2 section headers by keyword
   card.querySelectorAll('h2').forEach(h2 => {
     const t = h2.textContent.toLowerCase();
-    if (/ausblick|fazit/.test(t))                                  h2.classList.add('s-outlook');
-    else if (/mdr|ivdr|regulat|zulassung|bfarm|ema|fda/.test(t))   h2.classList.add('s-mdr');
-    else if (/vigilanz|sicherheit|recall|rückruf|fsca/.test(t))    h2.classList.add('s-vigil');
-    else if (/industrie|markt|medtech|unternehmen/.test(t))        h2.classList.add('s-industry');
-    else if (/klinisch|studie|evidenz|bewertung|cer/.test(t))      h2.classList.add('s-clinical');
+    if (/ausblick|fazit/.test(t))                                         h2.classList.add('s-outlook');
+    else if (/pipeline|approv|zulassung|phase|fda|ema|💊/.test(t))        h2.classList.add('s-pharma');
+    else if (/business|deals|m&a|invest|aktie|💰/.test(t))                h2.classList.add('s-business');
+    else if (/eu policy|eu-policy|eu policy|hta|europäisch|🇪🇺/.test(t))  h2.classList.add('s-eu');
+    else if (/regulat|sicherheit|recall|rückruf|bfarm|mdr|ivdr|⚠/.test(t)) h2.classList.add('s-regul');
+    else if (/science|studie|klinik|forschung|wissen|🔬/.test(t))         h2.classList.add('s-science');
+    else if (/quick hits|kurz|⚡/.test(t))                                 h2.classList.add('s-quick');
+    /* legacy keyword matches for older briefings */
+    else if (/vigilanz|fsca/.test(t))                                     h2.classList.add('s-vigil');
+    else if (/industrie|medtech|unternehmen/.test(t))                     h2.classList.add('s-industry');
+    else if (/klinisch|evidenz|cer/.test(t))                              h2.classList.add('s-clinical');
   });
 
   // Style first paragraph as intro callout
@@ -951,7 +970,7 @@ function enhanceCard(card) {
     const mins = Math.max(1, Math.round(words / 220));
     const meta = document.createElement('div');
     meta.className = 'briefing-reading-meta';
-    meta.innerHTML = '<span class="meta-pill">MDR-Fokus</span>'
+    meta.innerHTML = '<span class="meta-pill">Pharma & RA</span>'
       + `<span class="meta-readtime">~${mins} Min. Lesezeit</span>`;
     h1.after(meta);
   }

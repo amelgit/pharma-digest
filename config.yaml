@@ -4,17 +4,32 @@ max_headlines_per_source: 10
 output_dir: summaries
 
 sources:
-  mdr_regulatory:
-    name: "MDR & Regulatorik"
+  pharma_industry:
+    name: "Pharma Pipeline & Business"
     sites:
-      - name: BfArM – Medizinprodukte
-        url: https://www.bfarm.de/SharedDocs/RSS/DE/Medizinprodukte.xml
+      - name: FiercePharma
+        url: https://www.fiercepharma.com/rss/xml
         type: rss
 
-      - name: FDA – Medical Devices
-        url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/medical-devices/rss.xml
+      - name: BioPharma Dive
+        url: https://www.biopharmadive.com/feeds/news/
         type: rss
 
+      - name: STAT News
+        url: https://www.statnews.com/feed/
+        type: rss
+
+      - name: Endpoints News
+        url: https://endpts.com/feed/
+        type: rss
+
+      - name: FDA – Drug Approvals
+        url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/drug-approvals-and-databases/rss.xml
+        type: rss
+
+  eu_regulatory:
+    name: "EU Policy & Regulatorik"
+    sites:
       - name: EMA – Pressemitteilungen
         url: https://www.ema.europa.eu/en/news/press-releases/rss
         type: rss
@@ -23,8 +38,16 @@ sources:
         url: https://www.raps.org/rss/news
         type: rss
 
-  vigilance_safety:
-    name: "Vigilanz & Sicherheit"
+      - name: BfArM – Arzneimittel
+        url: https://www.bfarm.de/SharedDocs/RSS/DE/Arzneimittel.xml
+        type: rss
+
+      - name: BfArM – Medizinprodukte
+        url: https://www.bfarm.de/SharedDocs/RSS/DE/Medizinprodukte.xml
+        type: rss
+
+  safety_alerts:
+    name: "Sicherheitsinformationen"
     sites:
       - name: BfArM – Sicherheitsinformationen
         url: https://www.bfarm.de/SiteGlobals/Forms/RSS/DE/rss_Sicherheitsinformationen.xml
@@ -34,32 +57,17 @@ sources:
         url: https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/recalls/rss.xml
         type: rss
 
-  industry_medtech:
-    name: "MedTech-Industrie"
+  science:
+    name: "Klinische Wissenschaft"
     sites:
-      - name: Medical Device Network
-        url: https://www.medicaldevice-network.com/feed/
+      - name: NEJM – Current Issue
+        url: https://www.nejm.org/action/showFeed?jc=nejmoa&type=etoc&feed=rss
         type: rss
 
-      - name: MedTech Dive
-        url: https://www.medtechdive.com/feeds/news/
+      - name: The Lancet
+        url: https://www.thelancet.com/rssfeed/lancet_online.xml
         type: rss
 
-      - name: MDDI Online
-        url: https://www.mddionline.com/rss.xml
-        type: rss
-
-  urology_market:
-    name: "Urologie & Wettbewerb"
-    sites:
-      - name: Urology Times
-        url: https://www.urologytimes.com/rss.xml
-        type: rss
-
-      - name: EAU – Uroweb News
-        url: https://uroweb.org/feed
-        type: rss
-
-      - name: Journal of Urology (AUA)
-        url: https://www.auajournals.org/action/showFeed?type=etoc&feed=rss&jc=juro
+      - name: Nature Medicine
+        url: https://www.nature.com/nm.rss
         type: rss
