@@ -4,6 +4,11 @@
     "source": "FiercePharma",
     "items": [
       {
+        "title": "Viridian, awaiting FDA decision, taps WuXi Bio in eye drug supply deal",
+        "url": "https://www.fiercepharma.com/manufacturing/viridian-awaiting-fda-decision-taps-wuxi-bio-veligrotug-supply-deal",
+        "published": ""
+      },
+      {
         "title": "ASCO preview: With expectations jacked up, Akeso's ivonescimab to face scrutiny in high-stakes plenary",
         "url": "https://www.fiercepharma.com/pharma/asco-preview-expectations-jacked-akeso-ivonescimab-face-scrutiny-high-stakes-plenary",
         "published": ""
@@ -47,11 +52,6 @@
         "title": "As calls for COINS Act expansion grow, will new rules sweep up China biotech licensing?",
         "url": "https://www.fiercepharma.com/biotech/calls-coins-act-expansion-grow-new-rules-sweep-china-biotech-licensing",
         "published": ""
-      },
-      {
-        "title": "Regulatory tracker: After US nod, Pfizer's Braftovi racks up colorectal cancer wins in EU, Canada",
-        "url": "https://www.fiercepharma.com/pharma/fierce-pharma-regulatory-tracker-2026",
-        "published": ""
       }
     ]
   },
@@ -59,6 +59,16 @@
     "category": "Pharma Pipeline & Business",
     "source": "BioPharma Dive",
     "items": [
+      {
+        "title": "Verge, following trial failure, rebrands its AI drug discovery ambitions",
+        "url": "https://www.biopharmadive.com/news/verge-genomics-labs-neuroscience-AI-drug-discovery/821229/",
+        "published": "27.05.2026, 18:43"
+      },
+      {
+        "title": "FDA delays decision on AstraZeneca breast cancer pill",
+        "url": "https://www.biopharmadive.com/news/astrazeneca-camizestrant-fda-delay-breast-cancer/821193/",
+        "published": "27.05.2026, 18:09"
+      },
       {
         "title": "Cardio drugmaker Kardigan plans to go public",
         "url": "https://www.biopharmadive.com/news/kardigan-ipo-filing-biotech-cardiovascular-heart-drug/821233/",
@@ -98,16 +108,6 @@
         "title": "Process intensification: Separating fact from fiction",
         "url": "https://www.biopharmadive.com/spons/process-intensification-separating-fact-from-fiction/820433/",
         "published": "26.05.2026, 09:00"
-      },
-      {
-        "title": "Measuring what matters: New priorities in COA selection",
-        "url": "https://www.biopharmadive.com/spons/measuring-what-matters-new-priorities-in-coa-selection/820214/",
-        "published": "26.05.2026, 09:00"
-      },
-      {
-        "title": "ASCO26: 5 data snapshots ahead of the year’s biggest cancer drug meeting",
-        "url": "https://www.biopharmadive.com/news/asco-2026-abstracts-merck-biontech-lilly-moderna/820898/",
-        "published": "22.05.2026, 15:46"
       }
     ]
   },
