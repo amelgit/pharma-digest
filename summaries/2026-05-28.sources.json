@@ -4,6 +4,31 @@
     "source": "FiercePharma",
     "items": [
       {
+        "title": "Pharma leaders meet with PM Takaichi in push for Japan to retain R&D edge",
+        "url": "https://www.fiercepharma.com/pharma/global-pharma-leaders-meet-japans-prime-minister-push-broader-life-sci-investment",
+        "published": ""
+      },
+      {
+        "title": "CVS restores coverage of Eli Lilly obesity med Zepbound, adds new pill Foundayo",
+        "url": "https://www.fiercepharma.com/pharma/cvs-restores-coverage-eli-lilly-obesity-drugs-zepbound-foundayo",
+        "published": ""
+      },
+      {
+        "title": "PharmaEssentia taps Incyte alum Eric Vogel as it eyes Besremi expansion",
+        "url": "https://www.fiercepharma.com/marketing/pharmaessentia-taps-incyte-alum-eric-vogel-it-eyes-besremi-expansion",
+        "published": ""
+      },
+      {
+        "title": "With Elahere building steam, AbbVie nets FDA nod for another ImmunoGen cancer asset",
+        "url": "https://www.fiercepharma.com/pharma/elahere-building-steam-abbvie-nets-another-immunogen-fda-nod-rare-blood-cancer-conjugate",
+        "published": ""
+      },
+      {
+        "title": "Kaléo speaks up on allergy awareness to amplify patient stories",
+        "url": "https://www.fiercepharma.com/marketing/kaleo-speaks-allergy-awareness-amplify-patient-stories",
+        "published": ""
+      },
+      {
         "title": "Viridian, awaiting FDA decision, taps WuXi Bio in eye drug supply deal",
         "url": "https://www.fiercepharma.com/manufacturing/viridian-awaiting-fda-decision-taps-wuxi-bio-veligrotug-supply-deal",
         "published": ""
@@ -27,31 +52,6 @@
         "title": "Outlook moves toward potential US nod for thrice-snubbed eye drug with FDA appeal win",
         "url": "https://www.fiercepharma.com/pharma/outlook-marches-toward-hopeful-us-nod-thrice-snubbed-eye-drug-after-chalking-fda-appeal-win",
         "published": ""
-      },
-      {
-        "title": "Amid policy and pricing headwinds, US healthcare and life sci faces 'vast field of opportunity': survey",
-        "url": "https://www.fiercepharma.com/pharma/amid-policy-and-pricing-headwinds-us-healthcare-and-life-sci-faces-vast-field-opportunity",
-        "published": ""
-      },
-      {
-        "title": "Biogen investigated by Italian regulator over multiple sclerosis ‘market abuse’ claims",
-        "url": "https://www.fiercepharma.com/marketing/biogen-investigated-italian-regulator-over-multiple-sclerosis-market-abuse-claims",
-        "published": ""
-      },
-      {
-        "title": "FDA delays ruling on AstraZeneca’s breast cancer drug after negative adcomm vote",
-        "url": "https://www.fiercepharma.com/biotech/fda-delays-ruling-astrazenecas-breast-cancer-drug-after-negative-adcomm-vote",
-        "published": ""
-      },
-      {
-        "title": "Eli Lilly wins argument over Noom’s GLP-1 dosing claims",
-        "url": "https://www.fiercepharma.com/marketing/eli-lilly-wins-argument-over-nooms-glp-1-dosing-claims",
-        "published": ""
-      },
-      {
-        "title": "As calls for COINS Act expansion grow, will new rules sweep up China biotech licensing?",
-        "url": "https://www.fiercepharma.com/biotech/calls-coins-act-expansion-grow-new-rules-sweep-china-biotech-licensing",
-        "published": ""
       }
     ]
   },
@@ -59,6 +59,16 @@
     "category": "Pharma Pipeline & Business",
     "source": "BioPharma Dive",
     "items": [
+      {
+        "title": "GSK, Ionis unveil data for hepatitis B drug touted as ‘functional cure’",
+        "url": "https://www.biopharmadive.com/news/gsk-ionis-bepirovirsen-hepatitis-b-nejm-study-results/821341/",
+        "published": "28.05.2026, 16:01"
+      },
+      {
+        "title": "CVS obesity drug deal puts Lilly on equal footing with Novo",
+        "url": "https://www.biopharmadive.com/news/lilly-cvs-caremark-formulary-zepbound-foundayo-obesity-glp1/821327/",
+        "published": "28.05.2026, 15:09"
+      },
       {
         "title": "Verge, following trial failure, rebrands its AI drug discovery ambitions",
         "url": "https://www.biopharmadive.com/news/verge-genomics-labs-neuroscience-AI-drug-discovery/821229/",
@@ -98,16 +108,6 @@
         "title": "Astellas eyes more cost cuts; FDA panel to debate Moderna vaccine",
         "url": "https://www.biopharmadive.com/news/astellas-cuts-moderna-fda-datroway-tnbc-hepcludex-hepatitis/821055/",
         "published": "26.05.2026, 14:16"
-      },
-      {
-        "title": "SR One’s Simeon George on how China is rewriting biotech’s venture playbook",
-        "url": "https://www.biopharmadive.com/news/simeon-george-sr-one-china-venture-financing/820781/",
-        "published": "26.05.2026, 11:00"
-      },
-      {
-        "title": "Process intensification: Separating fact from fiction",
-        "url": "https://www.biopharmadive.com/spons/process-intensification-separating-fact-from-fiction/820433/",
-        "published": "26.05.2026, 09:00"
       }
     ]
   },
@@ -116,54 +116,54 @@
     "source": "STAT News",
     "items": [
       {
-        "title": "STAT+: Heart patch engineered from stem cells revved up weakened hearts",
-        "url": "https://www.statnews.com/2026/05/27/biovat-heart-failure-stem-cell-muscle-patch-nejm-study/?utm_campaign=rss",
-        "published": "27.05.2026, 21:00"
+        "title": "STAT+: Trump’s pharma deals get tested",
+        "url": "https://www.statnews.com/2026/05/28/trump-pharma-mfn-deals-medicaid-work-requirement-rules-dc-diagnosis/?utm_campaign=rss",
+        "published": "28.05.2026, 16:07"
       },
       {
-        "title": "Opinion: MIT president: Why so many optimistic scientists are losing heart",
-        "url": "https://www.statnews.com/2026/05/27/science-funding-derailed-breakthroughs/?utm_campaign=rss",
-        "published": "27.05.2026, 14:55"
+        "title": "Opinion: Ebola at the World Cup? Here’s what we should actually worry about",
+        "url": "https://www.statnews.com/2026/05/28/ebola-world-cup-travel-public-health-measles/?utm_campaign=rss",
+        "published": "28.05.2026, 14:24"
       },
       {
-        "title": "STAT+: Kailera’s own ‘triple-G’ drug also looks very powerful",
-        "url": "https://www.statnews.com/2026/05/27/biotech-news-kailera-triple-g-drug-looks-very-powerful/?utm_campaign=rss",
-        "published": "27.05.2026, 14:33"
+        "title": "STAT+: Oura brings rings to the cuffless blood pressure party",
+        "url": "https://www.statnews.com/2026/05/28/oura-arrives-blood-pressure-party-health-tech/?utm_campaign=rss",
+        "published": "28.05.2026, 14:01"
       },
       {
-        "title": "STAT+: Pharmalittle: We’re reading about an AstraZeneca breast cancer pill, an ADAP deal in Florida, and more",
-        "url": "https://www.statnews.com/pharmalot/2026/05/27/astrazeneca-breast-cancer-pill-adap-deal-in-florida/?utm_campaign=rss",
-        "published": "27.05.2026, 13:33"
+        "title": "STAT+: Pharmalittle: We’re reading about a hepatitis B drug, CVS returns Lilly obesity drug to formularies, and more",
+        "url": "https://www.statnews.com/pharmalot/2026/05/28/hepatitis-drug-cvs-returns-lilly-obesity-drug-to-formularies/?utm_campaign=rss",
+        "published": "28.05.2026, 13:26"
       },
       {
-        "title": "STAT+: Where patients and hospitals disagree about AI",
-        "url": "https://www.statnews.com/2026/05/27/health-ai-where-patients-hospitals-disagree-ai-prognosis/?utm_campaign=rss",
-        "published": "27.05.2026, 13:09"
+        "title": "STAT+: Ahead of ASCO, all eyes on pancreatic cancer",
+        "url": "https://www.statnews.com/2026/05/28/biotech-news-asco-preview-2026-all-eyes-on-pancreatic-cancer/?utm_campaign=rss",
+        "published": "28.05.2026, 13:21"
       },
       {
-        "title": "Trump says latest medical exam went ‘PERFECTLY’",
-        "url": "https://www.statnews.com/2026/05/27/health-news-trump-says-latest-medical-exam-went-perfectly/?utm_campaign=rss",
-        "published": "27.05.2026, 11:52"
+        "title": "The latest developments on Ebola, hepatitis B, long Covid",
+        "url": "https://www.statnews.com/2026/05/28/health-news-latest-news-on-ebola-hepatitis-b-long-covid/?utm_campaign=rss",
+        "published": "28.05.2026, 13:10"
       },
       {
-        "title": "Opinion: Sen. Dick Durbin: Trump is letting Big Tobacco target children",
-        "url": "https://www.statnews.com/2026/05/27/flavored-vapes-e-cigarettes-fda-trump-durbin/?utm_campaign=rss",
-        "published": "27.05.2026, 08:30"
+        "title": "STAT+: Blood pressure tech floods the market after FDA relaxes wearables oversight",
+        "url": "https://www.statnews.com/2026/05/28/fda-wellness-guidance-unvetted-blood-pressure-tech-floods-market/?utm_campaign=rss",
+        "published": "28.05.2026, 12:00"
       },
       {
-        "title": "Opinion: The patients demanding unvaccinated blood transfusions",
-        "url": "https://www.statnews.com/2026/05/27/unvaccinated-blood-transfusions-directed-donation-interview/?utm_campaign=rss",
-        "published": "27.05.2026, 08:30"
+        "title": "STAT+: An ASCO preview: What to watch for at cancer research’s big meeting",
+        "url": "https://www.statnews.com/2026/05/28/asco-preview-cancer-meeting/?utm_campaign=rss",
+        "published": "28.05.2026, 10:30"
       },
       {
-        "title": "STAT+: How Stanford patients help expose ‘fault lines’ in health AI adoption",
-        "url": "https://www.statnews.com/2026/05/27/stanford-patient-panels-feedback-on-ai-shaping-health-care/?utm_campaign=rss",
-        "published": "27.05.2026, 08:30"
+        "title": "STAT+: Trump’s drug-pricing deals set to be tested by new product launches",
+        "url": "https://www.statnews.com/2026/05/28/trump-most-favored-nation-drug-pricing-secrets-revealed-soon/?utm_campaign=rss",
+        "published": "28.05.2026, 08:30"
       },
       {
-        "title": "STAT+: ‘Are we just going to give up and die like every other generation?’",
-        "url": "https://www.statnews.com/2026/05/27/longevity-movement-shift-fringe-idea-to-big-business/?utm_campaign=rss",
-        "published": "27.05.2026, 08:30"
+        "title": "STAT+: Experimental hepatitis B treatment was a ‘functional cure’ for nearly 1 in 5, new data show",
+        "url": "https://www.statnews.com/2026/05/28/hepatitis-b-treatment-gsk-clinical-trials/?utm_campaign=rss",
+        "published": "28.05.2026, 08:30"
       }
     ]
   },
@@ -172,54 +172,54 @@
     "source": "Endpoints News",
     "items": [
       {
-        "title": "AstraZeneca's breast cancer PDUFA delayed; Arrowhead aims at same obesity target as Wave",
-        "url": "https://endpoints.news/astrazenecas-breast-cancer-pdufa-delayed-arrowhead-aims-at-same-obesity-target-as-wave/",
-        "published": "27.05.2026, 15:33"
+        "title": "Lilly obesity meds Foundayo and Zepbound to gain CVS coverage",
+        "url": "https://endpoints.news/lilly-obesity-meds-foundayo-and-zepbound-to-gain-cvs-coverage/",
+        "published": "28.05.2026, 17:28"
       },
       {
-        "title": "Apogee secures Blackstone capital to move Dupixent rival into Phase 3",
-        "url": "https://endpoints.news/apogee-secures-blackstone-capital-to-move-dupixent-rival-into-phase-3/",
-        "published": "27.05.2026, 15:07"
+        "title": "For wearables, it’s a GLP-1 world",
+        "url": "https://endpoints.news/for-wearables-its-a-glp-1-world/",
+        "published": "28.05.2026, 15:58"
       },
       {
-        "title": "WuXi Bio signs deal to manufacture Viridian's thyroid eye disease drug",
-        "url": "https://endpoints.news/wuxi-bio-signs-deal-to-manufacture-viridians-thyroid-eye-disease-drug/",
-        "published": "27.05.2026, 13:55"
+        "title": "ICON audit finds overstated revenue; Secretome and Psilera raise cash",
+        "url": "https://endpoints.news/icon-audit-finds-overstated-revenue-secretome-and-psilera-raise-cash/",
+        "published": "28.05.2026, 14:51"
       },
       {
-        "title": "#ASCO26: Cancer immunotherapy's magic bullet era is fading. Here's what's next",
-        "url": "https://endpoints.news/asco26-cancer-immunotherapys-magic-bullet-era-is-fading-heres-whats-next/",
-        "published": "27.05.2026, 13:53"
+        "title": "#ASCO26: After leaving Legend, Frank Fan is ready to showcase his next project",
+        "url": "https://endpoints.news/asco26-after-leaving-legend-frank-fan-is-ready-to-showcase-his-next-project/",
+        "published": "28.05.2026, 14:47"
       },
       {
-        "title": "Biopharma Sentiment Index | Q2 2026",
-        "url": "https://endpoints.news/biopharma-sentiment-index-q2-2026/",
-        "published": "27.05.2026, 13:47"
+        "title": "Niowave’s $75M radioisotope facility; CordenPharma to buy AmbioPharm",
+        "url": "https://endpoints.news/niowaves-75m-radioisotope-facility-cordenpharma-to-buy-ambiopharm/",
+        "published": "28.05.2026, 13:54"
       },
       {
-        "title": "Signos raises $20M as it eyes health plan, pharma relationships",
-        "url": "https://endpoints.news/signos-raises-20m-as-it-eyes-health-plan-pharma-relationships/",
-        "published": "27.05.2026, 13:00"
+        "title": "Charles River CEO says it likely won’t be the last manufacturer to break away from cell and gene therapy",
+        "url": "https://endpoints.news/charles-river-ceo-says-it-likely-wont-be-the-last-manufacturer-to-break-away-from-cell-and-gene-therapy/",
+        "published": "28.05.2026, 13:38"
       },
       {
-        "title": "Waypoint Bio raises $20M to run three CAR-T trials in China",
-        "url": "https://endpoints.news/waypoint-bio-raises-20m-to-run-three-car-t-trials-in-china/",
-        "published": "27.05.2026, 10:45"
+        "title": "China gene editing startup YolTech raises $70M to move CRISPR therapies forward",
+        "url": "https://endpoints.news/china-gene-editing-startup-yoltech-raises-70m-to-move-crispr-therapies-forward/",
+        "published": "28.05.2026, 12:30"
       },
       {
-        "title": "Kardigan readies Nasdaq IPO to back three cardio drugs",
-        "url": "https://endpoints.news/kardigan-readies-nasdaq-ipo-to-back-three-cardio-drugs/",
-        "published": "27.05.2026, 00:15"
+        "title": "Oura pushes deeper into healthcare services as part of new ring launch",
+        "url": "https://endpoints.news/oura-pushes-deeper-into-healthcare-services-as-part-of-new-ring-launch/",
+        "published": "28.05.2026, 12:00"
       },
       {
-        "title": "Post-Hoc Live: Jeremy Levin on biotech's existential moment",
-        "url": "https://endpoints.news/post-hoc-live-jeremy-levin-on-biotechs-existential-moment/",
-        "published": "26.05.2026, 17:39"
+        "title": "AbbVie clinches FDA approval for ultra-rare blood cancer ADC from ImmunoGen purchase",
+        "url": "https://endpoints.news/abbvie-clinches-fda-approval-for-ultra-rare-blood-cancer-adc-from-immunogen-purchase/",
+        "published": "28.05.2026, 11:20"
       },
       {
-        "title": "Outlook says FDA will sign off on its version of Avastin for wet AMD",
-        "url": "https://endpoints.news/outlook-says-fda-will-sign-off-on-its-version-of-avastin-for-wet-amd/",
-        "published": "26.05.2026, 17:16"
+        "title": "GSK spells out positive Phase 3 data for hepatitis B drug it licensed from Ionis",
+        "url": "https://endpoints.news/gsk-spells-out-positive-phase-3-data-for-hepatitis-b-drug-it-licensed-from-ionis/",
+        "published": "28.05.2026, 08:30"
       }
     ]
   },
@@ -284,6 +284,16 @@
     "source": "Nature Medicine",
     "items": [
       {
+        "title": "Gut microbiome screens could identify risk of Parkinson’s disease years before symptoms appear",
+        "url": "https://www.nature.com/articles/s41591-026-04458-8",
+        "published": "28.05.2026, 00:00"
+      },
+      {
+        "title": "Genetic–exposome interactions and aging clocks in dementia: the ReDLat2 initiative",
+        "url": "https://www.nature.com/articles/s41591-026-04433-3",
+        "published": "28.05.2026, 00:00"
+      },
+      {
         "title": "What Utah’s clinical AI sandbox reveals about independent oversight",
         "url": "https://www.nature.com/articles/s41591-026-04418-2",
         "published": "27.05.2026, 00:00"
@@ -312,16 +322,6 @@
         "title": "Semaglutide versus placebo in individuals with poor weight loss after bariatric surgery: a double-blinded, randomized, placebo-controlled trial",
         "url": "https://www.nature.com/articles/s41591-026-04416-4",
         "published": "22.05.2026, 00:00"
-      },
-      {
-        "title": "AI-induced never-skilling in medical education",
-        "url": "https://www.nature.com/articles/s41591-026-04438-y",
-        "published": "22.05.2026, 00:00"
-      },
-      {
-        "title": "Integrating public health into house design",
-        "url": "https://www.nature.com/articles/s41591-026-04413-7",
-        "published": "21.05.2026, 00:00"
       }
     ]
   }
