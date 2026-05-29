@@ -257,6 +257,20 @@ def render_sources(sources: list) -> str:
     )
 
 
+def _congrats_banner() -> str:
+    return (
+        '<div class="congrats-banner">'
+        '<div class="congrats-title">🎉 Herzlichen Glückwunsch! 🎉</div>'
+        '<p>Heute gibt es kurz eine Pause vom Pharma-Tagesgeschäft —<br>'
+        'denn du hast gestern etwas viel Wichtigeres erreicht:</p>'
+        '<span class="congrats-highlight">Vollzeit bei Klosterfrau. Verdient. Offiziell. 💼✨</span>'
+        '<hr class="congrats-sep">'
+        '<p>Du machst das großartig — und das wissen sie jetzt auch.</p>'
+        '<p>Auf den nächsten Schritt! 🥂</p>'
+        '</div>'
+    )
+
+
 def load_briefings() -> list[dict]:
     briefings = []
     for path in sorted(SUMMARIES_DIR.glob("*.md"), reverse=True):
@@ -284,6 +298,9 @@ def load_briefings() -> list[dict]:
         if sources_path.exists():
             sources = json.loads(sources_path.read_text(encoding="utf-8"))
             html += render_sources(sources)
+
+        if path.stem == "2026-05-29":
+            html = _congrats_banner() + html
 
         briefings.append({
             "id": path.stem,
@@ -829,6 +846,49 @@ HTML_TEMPLATE = """<!DOCTYPE html>
   body.light-mode .briefing-card h2.s-vigil    { border-bottom-color: #dc2626; }
   body.light-mode .briefing-card h2.s-industry { border-bottom-color: #16a34a; }
   body.light-mode .briefing-card h2.s-clinical { border-bottom-color: #0d9488; }
+
+  /* ── Congratulations Banner ── */
+  .congrats-banner {
+    margin-bottom: 32px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, rgba(251,191,36,.14) 0%, rgba(245,158,11,.08) 100%);
+    border: 2px solid rgba(251,191,36,.42);
+    border-radius: 12px;
+    text-align: center;
+  }
+  body.light-mode .congrats-banner {
+    background: linear-gradient(135deg, rgba(251,191,36,.11) 0%, rgba(245,158,11,.06) 100%);
+    border-color: rgba(217,119,6,.38);
+  }
+  .congrats-title {
+    font-size: 21px;
+    font-weight: 800;
+    color: #fbbf24;
+    margin-bottom: 14px;
+    letter-spacing: 0.01em;
+  }
+  body.light-mode .congrats-title { color: #b45309; }
+  .congrats-banner p {
+    font-size: 15px !important;
+    line-height: 1.8 !important;
+    color: var(--para-text) !important;
+    margin-bottom: 8px !important;
+  }
+  .congrats-banner p:last-child { margin-bottom: 0 !important; }
+  .congrats-highlight {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fde68a;
+    margin: 12px 0;
+    letter-spacing: 0.01em;
+  }
+  body.light-mode .congrats-highlight { color: #92400e; }
+  .congrats-sep {
+    border: none !important;
+    border-top: 1px solid rgba(251,191,36,.28) !important;
+    margin: 16px 0 !important;
+  }
 
   /* ── Intro callout ── */
   .briefing-card p.intro-p {
