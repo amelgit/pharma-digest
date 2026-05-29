@@ -278,5 +278,51 @@
         "published": "21.05.2026, 14:15"
       }
     ]
+  },
+  {
+    "category": "Klinische Wissenschaft",
+    "source": "Nature Medicine",
+    "items": [
+      {
+        "title": "Gut microbiome screens could identify risk of Parkinson’s disease years before symptoms appear",
+        "url": "https://www.nature.com/articles/s41591-026-04458-8",
+        "published": "28.05.2026, 00:00"
+      },
+      {
+        "title": "Genetic–exposome interactions and aging clocks in dementia: the ReDLat2 initiative",
+        "url": "https://www.nature.com/articles/s41591-026-04433-3",
+        "published": "28.05.2026, 00:00"
+      },
+      {
+        "title": "What Utah’s clinical AI sandbox reveals about independent oversight",
+        "url": "https://www.nature.com/articles/s41591-026-04418-2",
+        "published": "27.05.2026, 00:00"
+      },
+      {
+        "title": "Enabling secure discovery in trusted research environments with improved tooling",
+        "url": "https://www.nature.com/articles/s41591-026-04401-x",
+        "published": "26.05.2026, 00:00"
+      },
+      {
+        "title": "Fibroblast growth factor receptor inhibition for succinate dehydrogenase-deficient gastrointestinal stromal tumors: a phase 2 trial",
+        "url": "https://www.nature.com/articles/s41591-026-04376-9",
+        "published": "26.05.2026, 00:00"
+      },
+      {
+        "title": "Naming in medicine: how disease nomenclature shapes diagnosis, research and patient lives",
+        "url": "https://www.nature.com/articles/s41591-026-04456-w",
+        "published": "22.05.2026, 00:00"
+      },
+      {
+        "title": "A rare case of gene therapy-linked cancer",
+        "url": "https://www.nature.com/articles/d41591-026-00027-1",
+        "published": "22.05.2026, 00:00"
+      },
+      {
+        "title": "Semaglutide versus placebo in individuals with poor weight loss after bariatric surgery: a double-blinded, randomized, placebo-controlled trial",
+        "url": "https://www.nature.com/articles/s41591-026-04416-4",
+        "published": "22.05.2026, 00:00"
+      }
+    ]
   }
 ]

@@ -73,13 +73,13 @@
       "name": "Coloplast",
       "decimals": 2,
       "prefix": "DKK",
-      "last_close": 399.8,
+      "last_close": 401.0,
       "last_date": "29.05.2026",
-      "day_abs": 2.1,
-      "day_pct": 0.53,
-      "week_pct": -3.38,
-      "month_pct": 0.24,
-      "ytd_pct": -24.52,
+      "day_abs": 3.3,
+      "day_pct": 0.83,
+      "week_pct": -3.09,
+      "month_pct": 0.54,
+      "ytd_pct": -24.29,
       "week52_high": 612.93,
       "week52_low": 388.97,
       "market_state": "open",
@@ -120,6 +120,6 @@
       "url": "https://finance.yahoo.com/quote/IHI"
     }
   ],
-  "analysis": "Der breite Abwärtsdruck auf Pharmatitel — Novartis (−1,10 %), Bayer (−0,73 %), Siemens Healthineers (−0,57 %) — lässt sich weniger durch einzelne unternehmensspezifische Nachrichten erklären als durch sektorweite Vorsicht vor dem ASCO, wo enttäuschende Daten, etwa zu Akesos ivonescimab, rasch Bewertungskorrekturen auslösen könnten. AstraZenecas minimales Minus von −0,17 % ist angesichts der FDA-Reviewverzögerung bei der Brustkrebspille bemerkenswert moderat — entweder haben Anleger die Verzögerung bereits eingepreist, oder das breite Onkologie-Portfolio dämpft den Schaden. Kontraintuitiv positiv ist der iShares MedTech ETF mit +0,37 %, was auf Rotation aus Pharma in Medizintechnik hindeutet — begünstigt womöglich durch die FDA-Lockerung bei Wearables, die neue Marktchancen im Device-Segment signalisiert. Coloplasts leichtes Plus von +0,53 % fügt sich in dieses Bild einer selektiven MedTech-Präferenz, die defensiv orientierte Anleger bei anhaltender Pharma-Unsicherheit bevorzugen.",
-  "fetched_at": "29.05.2026, 09:07"
+  "analysis": "Der breite Abwärtsdruck auf Pharmaaktien — Novartis (-1,10%), Bayer (-0,73%), Siemens Healthineers (-0,57%) — erscheint weniger als Reaktion auf spezifische Einzelereignisse denn als sektorweite Risikoaversion im Vorfeld des ASCO, wo hohe Erwartungen an Akesos ivonescimab die Nervosität der Marktteilnehmer spürbar erhöhen. AstraZenecas moderates Minus von -0,17% ist angesichts der FDA-Reviewverzögerung bei der Brustkrebspille bemerkenswert beherrscht — möglicherweise weil der Markt die Verzögerung bereits eingepreist hatte oder das Onkologie-Portfolio als breit genug diversifiziert bewertet. Kontraintuitiv stark präsentiert sich hingegen der iShares MedTech ETF mit +0,37%, der von der FDA-Lockerung bei Wearable-Blutdruckgeräten profitiert haben dürfte und damit die regulatorische Asymmetrie zwischen schnellem US-Marktzugang und dem aufwändigeren europäischen MDR-Pfad als kurzfristigen Kursimpuls widerspiegelt. Coloplasts +0,83% fügt sich in dieses MedTech-positive Bild ein und deutet darauf hin, dass Investoren innerhalb des Gesundheitssektors selektiv von Pharma in Medizintechnik rotieren — ein Muster, das sich in der Vorwoche vor großen Onkologie-Kongressen historisch wiederholt.",
+  "fetched_at": "29.05.2026, 09:11"
 }
