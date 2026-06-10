@@ -4,6 +4,11 @@
     "source": "FiercePharma",
     "items": [
       {
+        "title": "AbbVie’s Skyrizi narrowly slides ahead of J&J’s Tremfya in May drug ad spending rankings",
+        "url": "https://www.fiercepharma.com/marketing/abbvies-skyrizi-narrowly-slides-ahead-jjs-tremfya-may-drug-ad-spending-rankings",
+        "published": ""
+      },
+      {
         "title": "WuXi AppTec lands on Pentagon blacklist, facing Biosecure ban",
         "url": "https://www.fiercepharma.com/pharma/wuxi-apptec-lands-us-government-list-companies-china-military-ties",
         "published": ""
@@ -46,11 +51,6 @@
       {
         "title": "ADA: Novo's Wegovy pill reaches new GLP-1 patients with impressive 3M prescription milestone",
         "url": "https://www.fiercepharma.com/pharma/ada-novos-wegovy-pill-reaches-new-glp-1-patients-impressive-3m-prescription-milestone",
-        "published": ""
-      },
-      {
-        "title": "Pfizer scores FDA pediatric expansion for hemophilia treatment Hympavzi",
-        "url": "https://www.fiercepharma.com/pharma/pfizer-scores-fda-pediatric-expansion-hemophilia-treatment-hympavzi",
         "published": ""
       }
     ]
@@ -116,6 +116,26 @@
     "source": "STAT News",
     "items": [
       {
+        "title": "Opinion: ‘They all think I’m insane’: What it’s like to start medical residency at 72",
+        "url": "https://www.statnews.com/2026/06/10/medical-residency-in-seventies-caribbean-medical-school-experience/?utm_campaign=rss",
+        "published": "10.06.2026, 08:30"
+      },
+      {
+        "title": "Opinion: Even in abortion-protecting states, teens face unnecessary barriers to care",
+        "url": "https://www.statnews.com/2026/06/10/parental-notification-laws-abortion-blue-states/?utm_campaign=rss",
+        "published": "10.06.2026, 08:30"
+      },
+      {
+        "title": "STAT+: As the U.S. looks on, European countries feel growing pressure on drug prices",
+        "url": "https://www.statnews.com/2026/06/10/european-drug-pricing-most-favored-nation-impact/?utm_campaign=rss",
+        "published": "10.06.2026, 08:30"
+      },
+      {
+        "title": "Are Republicans turning against medications for treating opioid addiction?",
+        "url": "https://www.statnews.com/2026/06/10/medications-opioid-use-disorder-trump-moud-policy-change/?utm_campaign=rss",
+        "published": "10.06.2026, 08:30"
+      },
+      {
         "title": "STAT+: The shortage of many medicines in the U.S. remains a ‘systemic’ problem, a new analysis finds",
         "url": "https://www.statnews.com/pharmalot/2026/06/09/drug-shortages-systemic-problem-analysis/?utm_campaign=rss",
         "published": "09.06.2026, 20:46"
@@ -144,26 +164,6 @@
         "title": "Gilead and Merck’s latest trial success and flop",
         "url": "https://www.statnews.com/2026/06/09/biotech-news-gilead-and-merck-latest-trial-success-and-flop/?utm_campaign=rss",
         "published": "09.06.2026, 15:11"
-      },
-      {
-        "title": "STAT+: NIAID appoints new acting director after weekslong questions over leadership",
-        "url": "https://www.statnews.com/2026/06/09/niaid-acting-director-john-powers-replaces-taubenberger/?utm_campaign=rss",
-        "published": "09.06.2026, 14:50"
-      },
-      {
-        "title": "STAT+: Pharmalittle: We’re reading about a $10.6 billion GSK deal, an AstraZeneca obesity pill, and more",
-        "url": "https://www.statnews.com/pharmalot/2026/06/09/gsk-buying-nuvalent-cancer-drug-astrazeneca-obesity-pill-data/?utm_campaign=rss",
-        "published": "09.06.2026, 13:39"
-      },
-      {
-        "title": "Dexcom RCT suggests CGM benefits for broad diabetes population",
-        "url": "https://www.statnews.com/2026/06/09/dexcom-cgm-trial-wearables-clinic-apple-updates-health-tech/?utm_campaign=rss",
-        "published": "09.06.2026, 13:34"
-      },
-      {
-        "title": "STAT+: NIH staffers published a letter of dissent a year ago. They feel it’s been ignored",
-        "url": "https://www.statnews.com/2026/06/09/nih-bethesda-declaration-1-year-later-dissenters-say-problems-persist/?utm_campaign=rss",
-        "published": "09.06.2026, 13:00"
       }
     ]
   },
