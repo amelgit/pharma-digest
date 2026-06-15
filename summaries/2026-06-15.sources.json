@@ -4,6 +4,31 @@
     "source": "FiercePharma",
     "items": [
       {
+        "title": "How lab data powers precision commercialization to drive therapy adoption",
+        "url": "https://www.fiercepharma.com/sponsored/how-lab-data-powers-precision-commercialization-drive-therapy-adoption",
+        "published": ""
+      },
+      {
+        "title": "The legacy approach to real-world data is costing you",
+        "url": "https://www.fiercepharma.com/sponsored/legacy-approach-real-world-data-costing-you",
+        "published": ""
+      },
+      {
+        "title": "Why MRD is becoming central to oncology drug development",
+        "url": "https://www.fiercepharma.com/sponsored/why-mrd-becoming-central-oncology-drug-development",
+        "published": ""
+      },
+      {
+        "title": "ASCO 2026 showed that precision oncology’s next challenge is translation",
+        "url": "https://www.fiercepharma.com/sponsored/asco-2026-showed-precision-oncologys-next-challenge-translation",
+        "published": ""
+      },
+      {
+        "title": "European Commission Approves CinnaGen’s Zandoriah® (teriparatide biosimilar) for Osteoporosis in Adults",
+        "url": "https://www.fiercepharma.com/sponsored/european-commission-approves-cinnagens-zandoriahr-teriparatide-biosimilar-osteoporosis",
+        "published": ""
+      },
+      {
         "title": "EHA: J&J sharpens myeloma edge as Talvey, Darzalex Faspro combo proves its worth in earlier disease stage",
         "url": "https://www.fiercepharma.com/pharma/eha-jj-sharpens-myeloma-edge-talvey-darzalex-faspro-combo-proves-its-worth-earlier-disease",
         "published": ""
@@ -26,31 +51,6 @@
       {
         "title": "In latest twist in Zepzelca saga, Jazz and PharmaMar lung cancer drug fails phase 3 test",
         "url": "https://www.fiercepharma.com/pharma/latest-twist-zepzelca-saga-jazz-and-pharmamar-lung-cancer-drug-fails-phase-3-test",
-        "published": ""
-      },
-      {
-        "title": "Regulatory tracker: Novo's oral GLP-1 picks up UK approval",
-        "url": "https://www.fiercepharma.com/pharma/fierce-pharma-regulatory-tracker-2026",
-        "published": ""
-      },
-      {
-        "title": "Lilly, Biogen, Eisai and Genentech sponsor new ‘Let’s Talk Alzheimer’s’ podcast",
-        "url": "https://www.fiercepharma.com/marketing/eli-lilly-biogen-eisai-and-genentech-sponsor-new-lets-talk-alzheimers-podcast",
-        "published": ""
-      },
-      {
-        "title": "Fierce Pharma Asia—Astellas CEO’s 5-year plan; Takeda’s psoriasis win; RA’s China bridge program",
-        "url": "https://www.fiercepharma.com/pharma/astellas-ceo-5-year-plan-takeda-psoriasis-win-ra-china-bridge-program",
-        "published": ""
-      },
-      {
-        "title": "‘Not simply saving cost’: Inside Astellas CEO’s 5-year strategy to counter Xtandi’s patent cliff",
-        "url": "https://www.fiercepharma.com/pharma/not-simply-saving-cost-inside-astellas-ceo-5-year-strategy-counter-xtandi-patent-cliff",
-        "published": ""
-      },
-      {
-        "title": "Genentech executes another round of layoffs, with 3 VPs axed",
-        "url": "https://www.fiercepharma.com/biotech/genentech-executes-another-round-layoffs-3-vps-axed",
         "published": ""
       }
     ]
@@ -116,6 +116,11 @@
     "source": "STAT News",
     "items": [
       {
+        "title": "STAT+: Where ‘democracy met science,’ 50 years ago",
+        "url": "https://www.statnews.com/2026/06/15/health-news-cambridge-recombinant-dna-anniversary/?utm_campaign=rss",
+        "published": "15.06.2026, 11:56"
+      },
+      {
         "title": "As states follow Trump’s Medicaid fraud playbook, people with disabilities struggle to find care",
         "url": "https://www.statnews.com/2026/06/15/medicaid-caregivers-state-pay-people-with-disabilities/?utm_campaign=rss",
         "published": "15.06.2026, 08:30"
@@ -159,11 +164,6 @@
         "title": "STAT+: Trump administration revisits policy to close Medicare drug price negotiation loophole",
         "url": "https://www.statnews.com/2026/06/12/medicare-drug-price-negotiation-loophole-proposed-rule/?utm_campaign=rss",
         "published": "12.06.2026, 21:45"
-      },
-      {
-        "title": "STAT+: Up and down the ladder: The latest comings and goings",
-        "url": "https://www.statnews.com/pharmalot/2026/06/12/up-and-down-the-ladder-job-changes-astrazeneca-bayer/?utm_campaign=rss",
-        "published": "12.06.2026, 15:04"
       }
     ]
   },
