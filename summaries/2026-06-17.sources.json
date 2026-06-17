@@ -4,6 +4,11 @@
     "source": "FiercePharma",
     "items": [
       {
+        "title": "'Biopharma ecosystem is back to full health,' fueled by M&A: PwC",
+        "url": "https://www.fiercepharma.com/pharma/ma-volume-and-value-indicate-biopharma-ecosystem-back-full-health-pwc",
+        "published": ""
+      },
+      {
         "title": "FDA, UK drug regulator deepen transatlantic ties with new liaison program",
         "url": "https://www.fiercepharma.com/pharma/fda-uk-drug-regulator-deepen-transatlantic-ties-new-liaison-program",
         "published": ""
@@ -47,11 +52,6 @@
         "title": "How lab data powers precision commercialization to drive therapy adoption",
         "url": "https://www.fiercepharma.com/sponsored/how-lab-data-powers-precision-commercialization-drive-therapy-adoption",
         "published": ""
-      },
-      {
-        "title": "Merck's Welireg-Keytruda pairing sticks the landing in adjuvant kidney cancer treatment with new FDA nod",
-        "url": "https://www.fiercepharma.com/pharma/mercks-welireg-keytruda-pairing-sticks-landing-adjuvant-kidney-cancer-treatment-new-fda-nod",
-        "published": ""
       }
     ]
   },
@@ -59,6 +59,11 @@
     "category": "Pharma Pipeline & Business",
     "source": "BioPharma Dive",
     "items": [
+      {
+        "title": "A new Westlake-backed biotech takes aim at migraines",
+        "url": "https://www.biopharmadive.com/news/vedana-migraine-stealth-launch-biotech-pacap/822960/",
+        "published": "17.06.2026, 09:00"
+      },
       {
         "title": "Lilly buys non-opioid pain drugmaker 4E",
         "url": "https://www.biopharmadive.com/news/lilly-4e-acquisition-non-opioid-pain-drugs/823016/",
@@ -103,11 +108,6 @@
         "title": "J&J multiple myeloma drug gains edge in earlier stage disease",
         "url": "https://www.biopharmadive.com/news/jj-multiple-myeloma-drug-talvey-earlier-stage-disease/822904/",
         "published": "15.06.2026, 13:37"
-      },
-      {
-        "title": "Celiac disease is entering a new era of therapeutic innovation",
-        "url": "https://www.biopharmadive.com/spons/celiac-disease-is-entering-a-new-era-of-therapeutic-innovation/822457/",
-        "published": "15.06.2026, 09:00"
       }
     ]
   },
@@ -115,6 +115,26 @@
     "category": "Pharma Pipeline & Business",
     "source": "STAT News",
     "items": [
+      {
+        "title": "STAT+: A prominent VC explains why she’s against U.S. restrictions on investment in China’s drug industry",
+        "url": "https://www.statnews.com/2026/06/17/china-biotech-pharma-us-venture-capital/?utm_campaign=rss",
+        "published": "17.06.2026, 08:30"
+      },
+      {
+        "title": "Opinion: How STAT decided to keep ‘health care’ as two words",
+        "url": "https://www.statnews.com/2026/06/17/health-care-one-word-or-two-stat-style/?utm_campaign=rss",
+        "published": "17.06.2026, 08:30"
+      },
+      {
+        "title": "Opinion: The quiet joy of being an oncologist",
+        "url": "https://www.statnews.com/2026/06/17/oncology-joy-doctor-patient-relationship/?utm_campaign=rss",
+        "published": "17.06.2026, 08:30"
+      },
+      {
+        "title": "Opinion: As a physician, I have never been more concerned about rates of congenital syphilis",
+        "url": "https://www.statnews.com/2026/06/17/congenital-syphilis-rates-mothers-babies-policy/?utm_campaign=rss",
+        "published": "17.06.2026, 08:30"
+      },
       {
         "title": "STAT+: How a biotech turned a trial failure into an AI model",
         "url": "https://www.statnews.com/2026/06/16/how-biotech-turned-trial-failure-ai-model-health-tech/?utm_campaign=rss",
@@ -144,26 +164,6 @@
         "title": "STAT+: Verge Labs’ new AI model solves patient stratification problems for neurology clinical trials",
         "url": "https://www.statnews.com/2026/06/16/verge-labs-ai-model-clinical-trials-data-neurology-diseases/?utm_campaign=rss",
         "published": "16.06.2026, 12:00"
-      },
-      {
-        "title": "STAT+: Human Cell Atlas leader’s tie to 10x Genomics raises conflict-of-interest questions",
-        "url": "https://www.statnews.com/2026/06/16/human-cell-atlas-consortium-meeting-boston-spatial-biology-next-step/?utm_campaign=rss",
-        "published": "16.06.2026, 08:30"
-      },
-      {
-        "title": "Opinion: Congress must reauthorize the Pandemic and All-Hazards Preparedness Act",
-        "url": "https://www.statnews.com/2026/06/16/aspr-pandemic-all-hazard-preparedness-act-reauthorization/?utm_campaign=rss",
-        "published": "16.06.2026, 08:30"
-      },
-      {
-        "title": "Opinion: I’m an Alzheimer’s specialist. I still missed it in my own father",
-        "url": "https://www.statnews.com/2026/06/16/alzheimers-diagnosis-treatment-infrastructure/?utm_campaign=rss",
-        "published": "16.06.2026, 08:30"
-      },
-      {
-        "title": "STAT+: FDA approves Colorado’s plan to import cheaper drugs from Canada",
-        "url": "https://www.statnews.com/pharmalot/2026/06/15/colorado-drug-imports-canada/?utm_campaign=rss",
-        "published": "15.06.2026, 18:19"
       }
     ]
   },
@@ -171,6 +171,11 @@
     "category": "Pharma Pipeline & Business",
     "source": "Endpoints News",
     "items": [
+      {
+        "title": "Migraine biotech Vedana Therapeutics makes its debut with $46M Series A",
+        "url": "https://endpoints.news/migraine-biotech-vedana-therapeutics-makes-its-debut-with-46m-series-a/",
+        "published": "17.06.2026, 09:00"
+      },
       {
         "title": "Health groups say HHS is trying to 'rush reinstatement' of ACIP",
         "url": "https://endpoints.news/health-groups-say-hhs-is-trying-to-rush-reinstatement-of-acip/",
@@ -214,11 +219,6 @@
       {
         "title": "CMS seeks to close Medicare negotiation 'loophole'",
         "url": "https://endpoints.news/cms-seeks-to-close-medicare-negotiation-loophole/",
-        "published": "15.06.2026, 18:53"
-      },
-      {
-        "title": "FDA plans to keep Makary priorities on trials, China, deputy says",
-        "url": "https://endpoints.news/fda-plans-to-keep-makary-priorities-on-trials-china-deputy-says/",
         "published": "15.06.2026, 18:53"
       }
     ]
@@ -284,6 +284,21 @@
     "source": "Nature Medicine",
     "items": [
       {
+        "title": "Medical innovation in LMICs: can India lead the way?",
+        "url": "https://www.nature.com/articles/s41591-026-04499-z",
+        "published": "17.06.2026, 00:00"
+      },
+      {
+        "title": "CAR T cells take on precancers",
+        "url": "https://www.nature.com/articles/s41591-026-04473-9",
+        "published": "17.06.2026, 00:00"
+      },
+      {
+        "title": "Why large-scale randomized trials of live-attenuated shingles vaccination for dementia prevention are urgently needed",
+        "url": "https://www.nature.com/articles/s41591-026-04474-8",
+        "published": "17.06.2026, 00:00"
+      },
+      {
         "title": "Engineered heart muscle passes early clinical milestone",
         "url": "https://www.nature.com/articles/d41591-026-00031-5",
         "published": "16.06.2026, 00:00"
@@ -307,21 +322,6 @@
         "title": "Plasma proteomic signatures of cellular aging predict human disease",
         "url": "https://www.nature.com/articles/s41591-026-04446-y",
         "published": "15.06.2026, 00:00"
-      },
-      {
-        "title": "Activity-dependent adaptive deep brain stimulation improves gait in Parkinson’s disease",
-        "url": "https://www.nature.com/articles/s41591-026-04432-4",
-        "published": "15.06.2026, 00:00"
-      },
-      {
-        "title": "Long-term independent use of an intracortical brain–computer interface for speech and cursor control",
-        "url": "https://www.nature.com/articles/s41591-026-04414-6",
-        "published": "15.06.2026, 00:00"
-      },
-      {
-        "title": "The Hong Kong Genome Project is a flagship initiative for precision medicine in Chinese populations",
-        "url": "https://www.nature.com/articles/s41591-026-04421-7",
-        "published": "12.06.2026, 00:00"
       }
     ]
   }
